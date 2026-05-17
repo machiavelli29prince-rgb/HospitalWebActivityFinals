@@ -2,12 +2,6 @@
 
 require_once("db.php");
 
-// $db=new Database();
-
-// echo $db->isConnected() ? "DB connected" : "DB not connected";
-
-// echo "<br>DELA TORRE, Karl Armand C.";
-
 class Appointment{
 
     private $id;

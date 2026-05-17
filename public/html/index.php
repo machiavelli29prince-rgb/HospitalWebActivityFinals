@@ -21,7 +21,7 @@
         </div>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark py-4"><a class="navbar-brand" href="#">
-                    <h1 class="h3 mt-0">BrandName</h1>
+                    <h1 class="h3 mt-0">Rodencia</h1>
                 </a><button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
                     data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>

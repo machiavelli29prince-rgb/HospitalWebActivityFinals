@@ -1,23 +1,23 @@
 <?php
-// Include our new OOP Class file
-require_once 'AppointmentManager.php';
+// Include Karl's library file
+require_once 'appointLib.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Instantiating the object (triggers constructor / DB connection)
-    $manager = new AppointmentManager();
+    // Instantiate Karl's class
+    $appointment = new Appointment();
 
-    // Collect data from the index.php form inputs
-    $name = $_POST['full_name'];
-    $email = $_POST['email'];
-    $department = $_POST['department'];
-    $time = $_POST['appointment_time'];
+    // Pass form input values into the class properties using setters
+    $appointment->setName($_POST['name']);
+    $appointment->setEmail($_POST['email']);
+    $appointment->setDepartment($_POST['department']);
+    $appointment->setTime($_POST['appointment_time']);
 
-    // Call the class method to save the data
-    if ($manager->createAppointment($name, $email, $department, $time)) {
-        echo "<script>alert('Appointment booked successfully via OOP!'); window.location.href='index.php';</script>";
+    // Execute the insertion block
+    if ($appointment->addAppointment()) {
+        echo "<script>alert('Appointment booked successfully using groupmate library!'); window.location.href='index.php';</script>";
     } else {
-        echo "<script>alert('Failed to save appointment. Please check your system configuration.'); window.location.href='index.php';</script>";
+        echo "<script>alert('Failed to save appointment. Check db.php configurations.'); window.location.href='index.php';</script>";
     }
 }
 ?>

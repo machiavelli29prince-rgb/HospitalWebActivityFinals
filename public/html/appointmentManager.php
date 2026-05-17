@@ -46,6 +46,31 @@ class AppointmentManager {
         return false;
     }
 
+    // Method to fetch appointments filtered by a specific department
+    public function getAppointmentsByDepartment($department) {
+        $sDept = $this->conn->real_escape_string(trim($department));
+        
+        // Query to select columns matching your exact database schema
+        $sql = "SELECT name, email, time FROM appointments WHERE department = ? ORDER BY id DESC";
+        
+        $stmt = $this->conn->prepare($sql);
+        $appointments = [];
+
+        if ($stmt) {
+            $stmt->bind_param("s", $sDept);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            // Loop through database rows and store them in an array
+            while ($row = $result->fetch_assoc()) {
+                $appointments[] = $row;
+            }
+            $stmt->close();
+        }
+        
+        return $appointments; // Returns an array of appointments
+    }
+
     // Destructor: Automatically closes connection when object is destroyed or script ends
     public function __destruct() {
         if ($this->conn) {

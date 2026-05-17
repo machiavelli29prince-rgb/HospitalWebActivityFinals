@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $appointment->setName($_POST['name']);
     $appointment->setEmail($_POST['email']);
     $appointment->setDepartment($_POST['department']);
-    $appointment->setTime($_POST['appointment_time']);
+    $appointment->setTime($_POST['time']);
 
     // Execute the insertion block
     if ($appointment->addAppointment()) {

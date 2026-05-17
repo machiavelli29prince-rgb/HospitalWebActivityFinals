@@ -101,12 +101,11 @@
                 </div>
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-item round bg-green-light" style="padding: 40px 40px">
-                        
+                        <h3 class="h3 text-color text-center">Book Appointment</h3>
                         
                         <form action="process-appointment.php" method="POST">
                             <div class="card-content" style="margin-top: 40px">
-                                <h3 class="h3 text-color text-center" for="id">Book Appointment</h3>
-                                <input type="text" class="form-control" id="id" name="id">
+                                
                                 <div class="form-group"><label class="h6">Name *</label>
                                     <div class="form-group" style="margin-top: 10px">
                                         <input class="form-control" type="text" name="name" placeholder="Full Name * " required></input>
@@ -133,7 +132,7 @@
                                 
                                 <div class="form-group" style="margin-top: 10px"><label class="h6">Time *</label>
                                     <div class="form-group" style="margin-top: 10px">
-                                        <select class="custom-select form-control" name="appointment_time" required>
+                                        <select class="custom-select form-control" name="time" required>
                                             <option value="">Select a time</option>
                                             <option value="09:00 AM">09:00 AM Available</option>
                                             <option value="11:00 AM">11:00 AM Available</option>
@@ -227,7 +226,7 @@
                             <img src="../img/team/gian.jpg" alt="Gian Carlos Cayari" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
-                            <h5 class="h5 text-color font-weight-bold">Gian Carlos O. Cayari</h5>
+                            <h5 class="h5 text-color font-weight-bold">Gian Carlos Cayari</h5>
                             <h6 class="h6 second-text-color mt-1">Core Developer</h6>
                             <p class="paragraph second-text-color mt-3 small">Maintains documentation structures and continuous testing integration.</p>
                         </div>
@@ -284,88 +283,67 @@
         <div class="container py-7 py-md-9">
             <div class="row justify-content-center">
                 <div class="text-center col-lg-6">
-                    <h2 class="h2 text-color">Leading Medicine</h2>
-                    <p class="paragraph second-text-color" style="margin-top: 10px">Problems trying to resolve the
-                        conflict between
-                        the two major realms of Classical physics: Newtonian mechanics </p>
+                    <h2 class="h2 text-color">Our Clinical Departments</h2>
+                    <p class="paragraph second-text-color" style="margin-top: 10px">
+                        Explore our medical fields and connect directly with the specialist physicians managing active emergency logs and consultations.
+                    </p>
                 </div>
             </div>
-            <div class="row align-items-stretch mt-5 mt-md-7">
+            
+            <div class="row justify-content-center mt-5 mt-md-7">
                 
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="card-item rounded bg-green-light" style="padding: 30px 35px">
-                        <div class="card-content">
-                            <div class="stars"><i class="bi bi-star-fill icn-sm text-warning"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star icn-sm text-warning" style="margin-left: 5px"></i></div>
-                            <h6 class="h6 second-text-color" style="margin-top: 20px">Slate helps you see how many
-                                more days you need to work to
-                                reach your financial goal.</h6>
-                            <div style="margin-top: 20px">
-                                <div class="d-flex align-items-center" style="margin-top: 20px">
-                                    <div class="circle-box circle-sm"><img class="cover" src="../img/user.1.jpg"></img>
-                                    </div>
-                                    <div style="margin-left: 15px"><a class="link text-green-primary" href="#">Regina
-                                            Miles</a>
-                                        <h6 class="h6 text-color">Designer</h6>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
+                        <div class="card-content text-center">
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-heart-pulse text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <h5 class="h5 text-color font-weight-bold">General Medicine</h5>
+                            <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
+                            <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Karl Armand</p>
+                            <hr class="my-3">
+                            <p class="paragraph second-text-color small">Handles baseline diagnostics, physical cleanups, and patient charting parameters.</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="card-item rounded bg-green-light" style="padding: 30px 35px">
-                        <div class="card-content">
-                            <div class="stars"><i class="bi bi-star-fill icn-sm text-warning"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star icn-sm text-warning" style="margin-left: 5px"></i></div>
-                            <h6 class="h6 second-text-color" style="margin-top: 20px">Slate helps you see how many
-                                more days you need to work to
-                                reach your financial goal.</h6>
-                            <div style="margin-top: 20px">
-                                <div class="d-flex align-items-center" style="margin-top: 20px">
-                                    <div class="circle-box circle-sm"><img class="cover" src="../img/user.2.jpg"></img>
-                                    </div>
-                                    <div style="margin-left: 15px"><a class="link text-green-primary" href="#">Regina
-                                            Miles</a>
-                                        <h6 class="h6 text-color">Designer</h6>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
+                        <div class="card-content text-center">
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-activity text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <h5 class="h5 text-color font-weight-bold">Cardiology</h5>
+                            <h6 class="h6 text-muted mt-2 small">Assigned Specialists:</h6>
+                            <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Roland & Dr. Jude</p>
+                            <hr class="my-3">
+                            <p class="paragraph second-text-color small">Manages complex pulse logic dynamics, structural constraints, and rhythm optimizations.</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-4 ">
-                    <div class="card-item rounded bg-green-light" style="padding: 30px 35px">
-                        <div class="card-content">
-                            <div class="stars"><i class="bi bi-star-fill icn-sm text-warning"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star-fill icn-sm text-warning" style="margin-left: 5px"></i><i
-                                    class="bi bi-star icn-sm text-warning" style="margin-left: 5px"></i></div>
-                            <h6 class="h6 second-text-color" style="margin-top: 20px">Slate helps you see how many
-                                more days you need to work to
-                                reach your financial goal.</h6>
-                            <div style="margin-top: 20px">
-                                <div class="d-flex align-items-center" style="margin-top: 20px">
-                                    <div class="circle-box circle-sm"><img class="cover" src="../img/user.3.jpg"></img>
-                                    </div>
-                                    <div style="margin-left: 15px"><a class="link text-green-primary" href="#">Regina
-                                            Miles</a>
-                                        <h6 class="h6 text-color">Designer</h6>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
+                        <div class="card-content text-center">
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-backpack text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <h5 class="h5 text-color font-weight-bold">Pediatrics</h5>
+                            <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
+                            <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Matthew Franz</p>
+                            <hr class="my-3">
+                            <p class="paragraph second-text-color small">Specializes in small scale objects, user-behavior wiring, and early growth benchmarks.</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
+                        <div class="card-content text-center">
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-diagram-3 text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <h5 class="h5 text-color font-weight-bold">Neurology</h5>
+                            <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
+                            <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Gian Carlos</p>
+                            <hr class="my-3">
+                            <p class="paragraph second-text-color small">Oversees deep architectural circuitry, state tables logic, and continuous link optimization.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

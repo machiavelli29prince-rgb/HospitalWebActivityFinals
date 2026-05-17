@@ -517,7 +517,7 @@
             <div class="container py-4">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6">
-                        <h6 class="h6 second-text-color text-md-center ">Made With Love By Figmaland All Right Reserved
+                        <h6 class="h6 second-text-color text-md-center ">Made With Love All Right Reserved
                         </h6>
                     </div>
                 </div>

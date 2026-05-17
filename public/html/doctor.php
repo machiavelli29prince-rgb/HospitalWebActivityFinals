@@ -1,5 +1,5 @@
 <?php
-// Include Karl's library file
+// Includes library file
 require_once 'appointLib.php';
 $appointmentLib = new Appointment();
 
@@ -10,7 +10,7 @@ if (!in_array($current_dept, $departments)) {
     $current_dept = "General Medicine";
 }
 
-// Invoke the department filter method we added into Karl's class
+// Invoke the department filter method
 $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
 ?>
 <!DOCTYPE html>
@@ -202,7 +202,7 @@ $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
         <div class="container py-4">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6">
-                    <h6 class="h6 second-text-color text-md-center m-0">Made With Love By Figmaland All Right Reserved</h6>
+                    <h6 class="h6 second-text-color text-md-center m-0">Made With Love All Right Reserved</h6>
                 </div>
             </div>
         </div>

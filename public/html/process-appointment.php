@@ -1,13 +1,13 @@
 <?php
-// Include Karl's library file
+// Includes library file
 require_once 'appointLib.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Instantiate Karl's class
+    // Instantiate library class
     $appointment = new Appointment();
 
-    // Pass form input values into the class properties using setters
+    // Pass form input values into the class properties
     $appointment->setName($_POST['name']);
     $appointment->setEmail($_POST['email']);
     $appointment->setDepartment($_POST['department']);

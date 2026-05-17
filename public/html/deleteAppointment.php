@@ -5,10 +5,10 @@ require_once("appointLib.php");
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $appointment = new Appointment();
     
-    // Pass the row identifier into the class instance property using Karl's setter
+    // Pass the row identifier into the class instance property
     $appointment->setId($_GET['id']);
     
-    // Execute the database delete query built inside Karl's class library
+    // Execute the database delete query built inside the class library
     if ($appointment->deleteAppointment()) {
         // Automatically bounce back to the doctor dashboard view with a deletion query flag
         header("Location: doctor.php?deleted=1");

@@ -8,7 +8,7 @@ class Appointment {
     private $name;
     private $email;
     private $department;
-    private $time; // Aligned with your database column name
+    private $time; // Aligned with database column name
 
     private $db;
 
@@ -86,7 +86,7 @@ class Appointment {
         return $this->db->execute();
     }
 
-    // FIXED: Adjusted to use 'time' column to match your phpMyAdmin setup
+    // FIXED: Adjusted to use 'time' column to match database setup
     function updateAppointment(){
         $this->db->query("UPDATE appointments SET name = :name, email = :email, department = :department, time = :time WHERE id = :id");
         $this->db->bind(":name", $this->name);

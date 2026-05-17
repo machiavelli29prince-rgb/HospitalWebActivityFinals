@@ -101,12 +101,12 @@
                 </div>
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-item round bg-green-light" style="padding: 40px 40px">
-                        <h3 class="h3 text-color text-center" for="id">Book Appointment</h3>
-                        <input type="text" class="form-control" id="id" name="id">
+                        
                         
                         <form action="process-appointment.php" method="POST">
                             <div class="card-content" style="margin-top: 40px">
-                                
+                                <h3 class="h3 text-color text-center" for="id">Book Appointment</h3>
+                                <input type="text" class="form-control" id="id" name="id">
                                 <div class="form-group"><label class="h6">Name *</label>
                                     <div class="form-group" style="margin-top: 10px">
                                         <input class="form-control" type="text" name="name" placeholder="Full Name * " required></input>

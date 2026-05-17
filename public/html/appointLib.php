@@ -56,7 +56,7 @@ class Appointment {
         return $this->db->set();
     }
 
-    // Fetch appointments for a specific department (Crucial for doctor.php!)
+    // Fetch appointments for a specific department (Crucial for doctor.php)
     function getAppointmentsByDepartment($department){
         $this->db->query("SELECT * FROM appointments WHERE department = :department ORDER BY id DESC");
         $this->db->bind(":department", $department);

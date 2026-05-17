@@ -8,7 +8,7 @@ require_once("db.php");
 
 // echo "<br>DELA TORRE, Karl Armand C.";
 
-class Post{
+class Appointment{
 
     private $id;
     private $name;
@@ -64,12 +64,12 @@ class Post{
         return $this->db->single();
     }
 
-    function addAppointment($image){
+    function addAppointment(){
         $this->db->query("INSERT INTO appointments (name, email, department, appointment_time) VALUES (:name, :email, :department, :appointment_time)");
-        $this->db->bind(":title",$this->name);
-        $this->db->bind(":body",$this->email);
-        $this->db->bind(":author",$this->department);
-        $this->db->bind(":image",$this->appointment_time);
+        $this->db->bind(":name",$this->name);
+        $this->db->bind(":email",$this->email);
+        $this->db->bind(":department",$this->department);
+        $this->db->bind(":appointment_time",$this->appointment_time);
         $this->db->execute();
     }  
     

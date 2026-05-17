@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="../css/bootstrap-icons.css">
 
     <style>
+        /* Smooth scrolling behavior for navigation anchors */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Main green brand colors */
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; } /* Deep medical green */
         .bg-green-primary:hover { background-color: #1b5e20 !important; }
@@ -60,29 +65,32 @@
 
 <body>
 
-    <header class="position-relative" data-aos="fade-down">
+    <header id="home" class="position-relative" data-aos="fade-down">
         <div class="background position-absolute z-index_-1 w-100 h-100"><img class="cover"
                 src="../img/hero-cover.5.jpg"></img>
             <div class="filter basic"></div>
         </div>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark py-4"><a class="navbar-brand" href="#">
+            <nav class="navbar navbar-expand-lg navbar-dark py-4"><a class="navbar-brand" href="#home">
                     <h1 class="h3 mt-0">Rodencia</h1>
                 </a><button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
                     data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                
                 <div class="collapse navbar-collapse ms-lg-5  mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="#"><span>Home</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><span>Product</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><span>Pricing</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><span>Contact</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#home"><span>Home</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team"><span>Our Team</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#departments"><span>Departments</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#faq"><span>FAQ</span></a></li>
                     </ul>
+                    
                     <ul class="navbar-nav mt-4 mt-lg-0 ms-auto align-items-center">
-                        <li class="nav-item ms-lg-4 mt-4 mt-lg-0"><button class="btn bg-green-primary"><span
-                                    class="btn-text light-text-color">Get Quote Now</span><i
-                                    class="bi bi-arrow-right-short icn-xs light-text-color"
-                                    style="margin-left: 15px"></i></button></li>
+                        <li class="nav-item me-lg-2 mb-2 mb-lg-0">
+                            <a href="doctor.php" class="btn btn-outline-light py-2 px-3" style="border-radius: 4px; text-decoration: none;">
+                                <i class="bi bi-shield-lock me-2" style="margin-right: 5px;"></i>Doctor Portal
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -90,14 +98,8 @@
         <div class="container py-5">
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-6 col-xl-5 my-5 my-lg-0 text-center text-md-start">
-                    <h1 class="h1 light-text-color mt-0">Meet the Best Hospital</h1>
-                    <h4 class="h4 light-text-color" style="margin-top: 35px">We know how large objects will act,
-                        but things on a small scale.</h4>
-                    <div class="cta" style="margin-top: 35px"><button
-                            class="btn bg-green-primary btn-round mb-3 mb-sm-0"><span class="btn-text">Get Quote
-                                Now</span></button><button
-                            class="btn light-text-color btn-round btn-outline mb-3 mb-sm-0 mx-2"><span
-                                class="btn-text">Learn More</span></button></div>
+                    <h1 class="h1 light-text-color mt-0">Welcome to Rodencia</h1>
+                    <h4 class="h4 light-text-color" style="margin-top: 35px">Book an appointment with our wonderful doctors!</h4>
                 </div>
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-item round bg-green-light" style="padding: 40px 40px">
@@ -155,7 +157,7 @@
         </div>
     </header>
 
-    <section>
+    <section id="team">
         <div class="container py-7 py-lg-9">
             <div class="row justify-content-center">
                 <div class="text-center col-lg-6">
@@ -279,7 +281,7 @@
         </div>
     </div>
 
-    <section class="light-gray-1">
+    <section id="departments" class="light-gray-1">
         <div class="container py-7 py-md-9">
             <div class="row justify-content-center">
                 <div class="text-center col-lg-6">
@@ -348,7 +350,7 @@
         </div>
     </section>
 
-    <section class="light-gray-1">
+    <section id="faq" class="light-gray-1">
         <div class="py-7">
             <div class="container py-5  py-md-7">
                 <div class="row justify-content-center">
@@ -357,7 +359,6 @@
                         <p class="paragraph second-text-color" style="margin-top: 10px">Problems trying to resolve the
                             conflict between
                             the two major realms of Classical physics: Newtonian mechanics </p>
-                    </div>
                 </div>
             </div>
             <div class="container mt-5">

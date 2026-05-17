@@ -90,6 +90,14 @@ $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
     <main class="py-7 py-lg-9 light-gray-1" style="min-height: 70vh;">
         <div class="container">
             
+            <div class="row mb-4" data-aos="fade-up">
+                <div class="col-12">
+                    <a href="index.php" class="btn btn-outline-secondary py-2 px-3" style="border-radius: 4px; text-decoration: none; font-weight: 600;">
+                        <i class="bi bi-arrow-left me-2" style="margin-right: 8px;"></i>Return to Main Site
+                    </a>
+                </div>
+            </div>
+            
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-10">
                     <h2 class="h2 text-color">Medical Staff Schedule</h2>
@@ -138,8 +146,6 @@ $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
                             
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle">
-                                    <div class="table-responsive">
-                                <table class="table table-hover align-middle">
                                     <thead class="bg-green-light">
                                         <tr>
                                             <th class="py-3 px-3 border-0 rounded-start">Patient Name</th>
@@ -166,14 +172,14 @@ $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
                                                 </td>
                                                 <td class="py-3 px-3 text-end">
                                                     <a href="updateAppointment.php?id=<?php echo $patient->id; ?>" 
-                                                    class="btn btn-sm btn-outline-primary py-1 px-2 me-2" 
-                                                    style="border-radius: 4px; text-decoration: none; font-size: 0.85rem; margin-right: 5px;">
+                                                       class="btn btn-sm btn-outline-primary py-1 px-2 me-1" 
+                                                       style="border-radius: 4px; text-decoration: none; font-size: 0.85rem; margin-right: 5px;">
                                                         <i class="bi bi-pencil-square"></i> Edit
                                                     </a>
                                                     <a href="deleteAppointment.php?id=<?php echo $patient->id; ?>" 
-                                                    class="btn btn-sm btn-outline-danger py-1 px-2" 
-                                                    onclick="return confirm('Are you sure you want to cancel this scheduled operational appointment?');"
-                                                    style="border-radius: 4px; text-decoration: none; font-size: 0.85rem;">
+                                                       class="btn btn-sm btn-outline-danger py-1 px-2" 
+                                                       onclick="return confirm('Are you sure you want to cancel this scheduled operational appointment?');"
+                                                       style="border-radius: 4px; text-decoration: none; font-size: 0.85rem;">
                                                         <i class="bi bi-trash-fill"></i> Cancel
                                                     </a>
                                                 </td>

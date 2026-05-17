@@ -212,7 +212,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalMatthew">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/matt-justincase.jpg" alt="Matthew Franz T. Figueroa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="../img/team/matt.jpg" alt="Matthew Franz T. Figueroa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Matthew Franz T. Figueroa</h5>
@@ -274,7 +274,7 @@
                     <h5 class="modal-title font-weight-bold">Matthew Franz T. Figueroa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-0">
+                <div class="modal-body p-0">    
                     <img src="../img/team/matt-popup.jpg" class="img-fluid w-100 rounded-bottom" alt="Matthew Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Matthew+Meme+Easter+Egg';">
                 </div>
             </div>

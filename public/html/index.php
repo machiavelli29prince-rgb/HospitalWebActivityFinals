@@ -56,47 +56,53 @@
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-item round light-background-color" style="padding: 40px 40px">
                         <h3 class="h3 text-color text-center">Book Appointment</h3>
-                        <div class="card-content" style="margin-top: 40px">
-                            <div class="form-group"><label class="h6">Name *</label>
-                                <div class="form-group" style="margin-top: 10px"><input class="form-control" type="text"
-                                        placeholder="Full Name * "></input></div>
+                        
+                        <form action="process-appointment.php" method="POST">
+                            <div class="card-content" style="margin-top: 40px">
+                                
+                                <div class="form-group"><label class="h6">Name *</label>
+                                    <div class="form-group" style="margin-top: 10px">
+                                        <input class="form-control" type="text" name="full_name" placeholder="Full Name * " required></input>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" style="margin-top: 10px"><label class="h6">Email address *</label>
+                                    <div class="form-group" style="margin-top: 10px">
+                                        <input class="form-control" type="email" name="email" placeholder="example@gmail.com" required></input>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" style="margin-top: 10px"><label class="h6">Department *</label>
+                                    <div class="form-group" style="margin-top: 10px">
+                                        <select class="custom-select form-control" name="department" style="margin-top: 10px" required>
+                                            <option value="">Please Select</option>
+                                            <option value="General Medicine">General Medicine</option>
+                                            <option value="Cardiology">Cardiology</option>
+                                            <option value="Pediatrics">Pediatrics</option>
+                                            <option value="Neurology">Neurology</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" style="margin-top: 10px"><label class="h6">Time *</label>
+                                    <div class="form-group" style="margin-top: 10px">
+                                        <select class="custom-select form-control" name="appointment_time" required>
+                                            <option value="">Select a time</option>
+                                            <option value="09:00 AM">09:00 AM Available</option>
+                                            <option value="11:00 AM">11:00 AM Available</option>
+                                            <option value="02:00 PM">02:00 PM Available</option>
+                                            <option value="04:00 PM">04:00 PM Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                             </div>
-                            <div class="form-group" style="margin-top: 10px"><label class="h6">Email address *</label>
-                                <div class="form-group" style="margin-top: 10px"><input class="form-control" type="text"
-                                        placeholder="example@gmail.com  "></input></div>
-                            </div>
-                            <div class="form-group" style="margin-top: 10px"><label class="h6">Departement *</label>
-                                <div class="form-group" style="margin-top: 10px"><select
-                                        class="custom-select form-control" style="margin-top: 10px">
-                                        <option>Please Select</option><svg width="8" height="14" viewBox="0 0 8 14"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M 0 12 L 5 7 L 0 2 L 1 0 L 8 7 L 1 14 L 0 12 Z"
-                                                fill="rgb(115, 115, 115)" />
-                                        </svg>
-                                        <option>List Entry # 1</option>
-                                        <option>List Entry # 2</option>
-                                        <option>List Entry # 3</option>
-                                        <option>List Entry # 4</option>
-                                        <option>List Entry # 5</option>
-                                    </select></div>
-                            </div>
-                            <div class="form-group" style="margin-top: 10px"><label class="h6">Time *</label>
-                                <div class="form-group" style="margin-top: 10px"><select
-                                        class="custom-select form-control">
-                                        <option>4:00 Available</option><svg width="8" height="14" viewBox="0 0 8 14"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M 0 12 L 5 7 L 0 2 L 1 0 L 8 7 L 1 14 L 0 12 Z"
-                                                fill="rgb(115, 115, 115)" />
-                                        </svg>
-                                        <option>List Entry # 1</option>
-                                        <option>List Entry # 2</option>
-                                        <option>List Entry # 3</option>
-                                        <option>List Entry # 4</option>
-                                        <option>List Entry # 5</option>
-                                    </select></div>
-                            </div>
-                        </div><button class="btn primary-color w-100" style="margin-top: 40px"><span>Book
-                                Appointment</span></button>
+                            
+                            <button type="submit" class="btn primary-color w-100" style="margin-top: 40px">
+                                <span>Book Appointment</span>
+                            </button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

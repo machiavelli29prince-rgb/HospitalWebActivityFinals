@@ -223,7 +223,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/gian-temp.jpg" alt="Gian Carlos Cayari" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="../img/team/gian.jpg" alt="Gian Carlos Cayari" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Gian Carlos O. Cayari</h5>

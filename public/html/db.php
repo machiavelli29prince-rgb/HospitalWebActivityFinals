@@ -1,15 +1,85 @@
 <?php
-$host = "localhost";
-$username = "root"; // Default XAMPP username
-$password = "";     // Default XAMPP password is empty
-$dbname = "your_database_name"; // Replace with your actual database name
+require_once('config/config.php');
 
-// Create connection
-$conn = new mysqli($host, $username, $password, $dbname);
+class Database{
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    private $host = DB_HOST;
+    private $user = DB_USER;
+    private $password = DB_PASSWORD;
+    private $dbname = DB_NAME;
+
+    private $connection;
+    private $error;
+    private $stmt;
+    private $dbconnected=false;
+
+    function __construct(){
+        //PDO connection
+        $dsn='mysql:host='.$this->host.";dbname=".$this->dbname;
+        $option=array(
+            PDO::ATTR_PERSISTENT=>true,
+            PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
+        );
+        try{
+            $this->connection=new PDO($dsn, 
+            $this->user,
+            $this->password,
+            $option);
+            $this->dbconnected=true;
+        }catch(PDOException $e){
+            $this->error = $e->getMessage();
+            $this->dbconnected=false;
+        }
+    }
+
+    function getError(){
+        return $this->error;
+    }
+    function isConnected(){
+        return $this->dbconnected;
+    }
+
+    //statement with query
+
+    function query($query){
+        $this->stmt=$this->connection->prepare($query);
+    }
+
+    //execute statment
+    function execute(){
+        return $this->stmt->execute();
+    }
+
+    //get results set as array
+    function set(){
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function single(){
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    function bind($param, $value, $type=null){
+        if(is_null($type)){
+            switch(true){
+                case is_int($value):
+                    $type=PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type= PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type=PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type=PDO::PARAM_STR;
+            }
+        }
+
+        $this->stmt->bindValue($param,$value,$type);
+    }
 }
-// Connection successful!
+
 ?>

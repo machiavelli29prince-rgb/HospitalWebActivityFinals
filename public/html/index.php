@@ -504,7 +504,8 @@
                         <div class="input-group input-style-2 mb-2 mr-sm-2"><input class="form-control" type="text"
                                 placeholder="Your Email"></input>
                             <div class="input-group-append mt-2 mt-sm-0"><button
-                                    class="btn bg-green-accent h-100"><span>Subscribe</span></button></div>          
+                                    class="btn bg-green-accent h-100"><span>Subscribe</span></button></div>  
+</section>        
     <footer class="position-relative">
         <div>
             <div class="container py-5 py-md-7">

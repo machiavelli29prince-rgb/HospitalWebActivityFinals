@@ -9688,3 +9688,71 @@ a {
   @media (min-width: 768px) {
     .contact-cover-2 {
       max-height: 600px; } }
+/* FAQ page */
+
+/* 1. Global FAQ Component Font Override */
+.custom-faq-accordion,
+.custom-faq-accordion .accordion-button,
+.custom-faq-accordion .accordion-body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/* 2. Modern Rounded Card Layout (Contrasts distinctly from a white page background) */
+.custom-faq-accordion .accordion-item {
+    background-color: #f4f6f8 !important; /* Premium ultra-light soft gray contrast canvas */
+    border: 1px solid #eef0f3 !important;   /* Sleek clean modern card boundary hairline */
+    border-radius: 16px !important;         /* Smooth, stylish modern rounded corners */
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.35s ease !important;
+    will-change: transform, box-shadow;
+}
+
+/* 3. Classy Hover Animation State: Floating elevation lift with premium shadow backdrop */
+.custom-faq-accordion .accordion-item:hover {
+    transform: translateY(-6px) scale(1.01) !important;
+    background-color: #ffffff !important; /* Elegant shift to crisp white on hover */
+    border-color: #2dc071 !important;     /* Subtle emerald highlight glow accent */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 4. Keeps clean styling metrics when the accordion card is active/expanded */
+.custom-faq-accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
+    background-color: #ffffff !important; /* Stays white when content is visible */
+    border-color: #2dc071 !important;
+    box-shadow: 0 10px 25px rgba(45, 192, 113, 0.04) !important;
+}
+
+/* 5. Clean Button Structure & Bug Fix: Eradicates blue focus ring browser highlights */
+.custom-faq-accordion .accordion-button {
+    background-color: transparent !important; /* Lets card background shine through */
+    color: #252b42 !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Colors active header title emerald text when card is opened */
+.custom-faq-accordion .accordion-button:not(.collapsed) {
+    color: #2dc071 !important; 
+}
+
+/* 6. Spacing Configuration: Generous inner padding to let lists breathe cleanly */
+.custom-faq-accordion .accordion-body {
+    background-color: transparent !important;
+    padding: 10px 30px 30px 30px !important; /* Extra spacing at the bottom and sides */
+}
+
+.custom-faq-accordion .accordion-body ul li {
+    margin-bottom: 12px !important; /* Additional breathing room between individual bullet items */
+    color: #737373 !important;
+}
+.custom-faq-accordion .accordion-body ul li:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Adjusts the default Bootstrap arrow color indicator hue context mapping */
+.custom-faq-accordion .accordion-button::after {
+    filter: hue-rotate(100deg) brightness(0.8);
+}

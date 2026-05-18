@@ -490,7 +490,21 @@
         </div>
     </div>
 </section>
-
+<section class="dark-background-color">
+        <div class="container py-5 py-md-7">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-5 mb-4 mb-lg-0">
+                    <h2 class="h2 light-text-color">Get In Touch</h2>
+                    <p class="paragraph light-text-color" style="margin-top: 15px">The gradual accumulation of
+                        information about atomic and
+                        small-scale behaviour during the first quarter of the 20th </p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-style-2 mb-2 mr-sm-2"><input class="form-control" type="text"
+                                placeholder="Your Email"></input>
+                            <div class="input-group-append mt-2 mt-sm-0"><button
+                                    class="btn bg-green-accent h-100"><span>Subscribe</span></button></div>          
     <footer class="position-relative">
         <div>
             <div class="container py-5 py-md-7">

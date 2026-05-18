@@ -350,13 +350,13 @@
         </div>
     </section>
 
-    <section id="faq" class="bg-white py-7">
+    <section id="faq" class="light-gray-1 py-7" style="background-color: #ffffff !important;">
     <div class="container py-5 py-md-7">
         <div class="row justify-content-center">
             <div class="text-center col-lg-8 mb-5">
                 <h2 class="h2 text-color fw-bold" style="font-size: 2.2rem;">FAQ</h2>
                 <p class="paragraph second-text-color mt-3 px-md-5">
-                    Here is a collection of frequently asked questions about our hospital's services, policies, and procedures. If you have any other inquiries, please feel free to contact our support team for assistance.
+                    Explore our comprehensive guide to frequently asked queries regarding medical care delivery pipelines, patient hospitality scheduling protocols, and network coverage framework portfolios.
                 </p>
             </div>
         </div>
@@ -366,16 +366,16 @@
                 <div class="accordion custom-faq-accordion" id="faqGroup1">
                     <div class="accordion-item border-0 overflow-hidden">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 What medical services do you provide?
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqGroup1">
                             <div class="accordion-body">
-                                <ul class="ps-3 mb-0" style="list-style-type: disc; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>24/7 Emergency and Trauma care.</li>
-                                    <li>Outpatient specialty consultations.</li>
-                                    <li>Advanced laboratory and imaging tests.</li>
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>24/7 Critical emergency care and trauma response.</li>
+                                    <li>Multidisciplinary outpatient specialty consultations.</li>
+                                    <li>Advanced diagnostic imaging and comprehensive laboratory analyses.</li>
                                 </ul>
                             </div>
                         </div>
@@ -387,16 +387,16 @@
                 <div class="accordion custom-faq-accordion" id="faqGroup2">
                     <div class="accordion-item border-0 overflow-hidden">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 How do I book a doctor appointment?
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqGroup2">
                             <div class="accordion-body">
-                                <ul class="ps-3 mb-0" style="list-style-type: disc; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>Book online through the patient portal.</li>
-                                    <li>Call our central hotline number.</li>
-                                    <li>Visit the outpatient concierge desk.</li>
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Secure real-time coordination via the online patient portal.</li>
+                                    <li>Direct telephone booking through our central concierge hotline.</li>
+                                    <li>On-site registration at the main outpatient desk.</li>
                                 </ul>
                             </div>
                         </div>
@@ -408,16 +408,16 @@
                 <div class="accordion custom-faq-accordion" id="faqGroup3">
                     <div class="accordion-item border-0 overflow-hidden">
                         <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 Which insurance plans do you accept?
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqGroup3">
                             <div class="accordion-body">
-                                <ul class="ps-3 mb-0" style="list-style-type: disc; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>Full PhilHealth case-rate coverage.</li>
-                                    <li>Leading private HMO networks.</li>
-                                    <li>International travel insurance providers.</li>
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Full PhilHealth case-rate benefits allocation.</li>
+                                    <li>Accredited private HMO corporate plan frameworks.</li>
+                                    <li>International health insurance networks for global patients.</li>
                                 </ul>
                             </div>
                         </div>
@@ -429,16 +429,16 @@
                 <div class="accordion custom-faq-accordion" id="faqGroup4">
                     <div class="accordion-item border-0 overflow-hidden">
                         <h2 class="accordion-header" id="headingFour">
-                            <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 What are your emergency room hours?
                             </button>
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqGroup4">
                             <div class="accordion-body">
-                                <ul class="ps-3 mb-0" style="list-style-type: disc; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>Open 24 hours a day, 7 days a week.</li>
-                                    <li>Fully staffed on holidays and weekends.</li>
-                                    <li>On-call surgical teams available anytime.</li>
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Continuous 24/7 operational capability for urgent cases.</li>
+                                    <li>Full staffing during holidays and weekend shifts.</li>
+                                    <li>On-call surgical teams prepared for immediate mobilization.</li>
                                 </ul>
                             </div>
                         </div>
@@ -450,16 +450,16 @@
                 <div class="accordion custom-faq-accordion" id="faqGroup5">
                     <div class="accordion-item border-0 overflow-hidden">
                         <h2 class="accordion-header" id="headingFive">
-                            <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                 How can I request medical records?
                             </button>
                         </h2>
                         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqGroup5">
                             <div class="accordion-body">
-                                <ul class="ps-3 mb-0" style="list-style-type: disc; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>Submit a request via the records window.</li>
-                                    <li>Provide a valid government-issued ID.</li>
-                                    <li>Processing takes 3 to 5 business days.</li>
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Formal request submission via the health information window.</li>
+                                    <li>Verification through verified government-issued identification keys.</li>
+                                    <li>Standard processing timeline of 3 to 5 business days.</li>
                                 </ul>
                             </div>
                         </div>
@@ -471,16 +471,16 @@
                 <div class="accordion custom-faq-accordion" id="faqGroup6">
                     <div class="accordion-item border-0 overflow-hidden">
                         <h2 class="accordion-header" id="headingSix">
-                            <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                                 Are hospital visitor hours restricted?
                             </button>
                         </h2>
                         <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqGroup6">
                             <div class="accordion-body">
-                                <ul class="ps-3 mb-0" style="list-style-type: disc; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>General visiting hours are 8:00 AM to 8:00 PM.</li>
-                                    <li>Maximum of two visitors per patient room.</li>
-                                    <li>ICU visits require nurse station approval.</li>
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Standard visitor clearance from 8:00 AM to 8:00 PM daily.</li>
+                                    <li>Maximum allowance of two visitors per patient room.</li>
+                                    <li>Specialized units require attending nurse station approval.</li>
                                 </ul>
                             </div>
                         </div>

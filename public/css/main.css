@@ -9690,69 +9690,80 @@ a {
       max-height: 600px; } }
 /* FAQ page */
 
-/* 1. Global FAQ Component Font Override */
+/* 1. Global FAQ Font Reset (Enforcing Montserrat) */
 .custom-faq-accordion,
 .custom-faq-accordion .accordion-button,
 .custom-faq-accordion .accordion-body {
     font-family: 'Montserrat', sans-serif !important;
 }
 
-/* 2. Modern Rounded Card Layout (Contrasts distinctly from a white page background) */
+/* 2. Modern Rounded Card Layout with Deep Volumetric Soft Shadows */
 .custom-faq-accordion .accordion-item {
-    background-color: #f4f6f8 !important; /* Premium ultra-light soft gray contrast canvas */
-    border: 1px solid #eef0f3 !important;   /* Sleek clean modern card boundary hairline */
-    border-radius: 16px !important;         /* Smooth, stylish modern rounded corners */
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                background-color 0.35s ease !important;
+    background-color: #f8faf9 !important; /* Extremely soft, clean neutral canvas background tint */
+    border: 1px solid #e2ebd5 !important;   /* Thin boundary hairline */
+    border-radius: 16px !important;         /* Generous modern rounded box corners */
+    
+    /* Premium Multi-Layered Drop Shadow Configuration */
+    box-shadow: 0 4px 20px rgba(26, 43, 73, 0.04), 
+                0 2px 6px rgba(59, 122, 87, 0.02) !important;
+                
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease !important;
     will-change: transform, box-shadow;
 }
 
-/* 3. Classy Hover Animation State: Floating elevation lift with premium shadow backdrop */
+/* Classy Hover State: Elevated lift vector with expanded ambient shadow profile */
 .custom-faq-accordion .accordion-item:hover {
     transform: translateY(-6px) scale(1.01) !important;
-    background-color: #ffffff !important; /* Elegant shift to crisp white on hover */
-    border-color: #2dc071 !important;     /* Subtle emerald highlight glow accent */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06) !important;
+    border-color: #3b7a57 !important; /* Refined Muted Sage Green hover highlight line */
+    box-shadow: 0 20px 38px rgba(26, 43, 73, 0.08), 
+                0 4px 12px rgba(59, 122, 87, 0.04) !important;
 }
 
-/* 4. Keeps clean styling metrics when the accordion card is active/expanded */
-.custom-faq-accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
-    background-color: #ffffff !important; /* Stays white when content is visible */
-    border-color: #2dc071 !important;
-    box-shadow: 0 10px 25px rgba(45, 192, 113, 0.04) !important;
-}
-
-/* 5. Clean Button Structure & Bug Fix: Eradicates blue focus ring browser highlights */
+/* 3. Button Typography Styles (Fixes Blue Color Leak / Focus Outline Bug) */
 .custom-faq-accordion .accordion-button {
-    background-color: transparent !important; /* Lets card background shine through */
-    color: #252b42 !important;
+    background-color: transparent !important; /* Inherits the elegant card canvas color */
+    color: #252b42 !important; /* Crisp dark navy text when closed */
     font-weight: 700 !important;
-    box-shadow: none !important;
+    padding: 24px 28px !important;
+    box-shadow: none !important; /* Eradicates default browser focus ring rings completely */
     border: none !important;
     outline: none !important;
 }
 
-/* Colors active header title emerald text when card is opened */
+/* Active Open Header Styles: Transitions text cleanly to Deep Slate Navy */
 .custom-faq-accordion .accordion-button:not(.collapsed) {
-    color: #2dc071 !important; 
+    color: #1a2b49 !important; /* Tolerable, premium Deep Slate Navy active text */
+    background-color: #ffffff !important; /* Switches header canvas card layer to white when active */
+    border-bottom: 1px solid #eef2f5 !important; /* Soft divider separator baseline */
 }
 
-/* 6. Spacing Configuration: Generous inner padding to let lists breathe cleanly */
+/* Forces the entire internal card block to go crisp white when active to match open headers */
+.custom-faq-accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
+    background-color: #ffffff !important;
+    border-color: #3b7a57 !important; /* Persistent elegant muted sage green border marker */
+    box-shadow: 0 12px 30px rgba(26, 43, 73, 0.06) !important;
+}
+
+/* 4. Formatting Inner Spacing Layout Metrics */
 .custom-faq-accordion .accordion-body {
-    background-color: transparent !important;
-    padding: 10px 30px 30px 30px !important; /* Extra spacing at the bottom and sides */
+    background-color: #ffffff !important;
+    padding: 24px 32px 32px 32px !important; /* Extra spacing padding parameters */
 }
 
+/* Bullet list structure spacing optimization */
 .custom-faq-accordion .accordion-body ul li {
-    margin-bottom: 12px !important; /* Additional breathing room between individual bullet items */
-    color: #737373 !important;
+    margin-bottom: 12px !important; /* Comfortable layout breathing room between rules */
+    color: #616e7c !important; /* Balanced slate-gray text for clear paragraph reading */
+    font-size: 0.92rem !important;
+    line-height: 1.6 !important;
 }
 .custom-faq-accordion .accordion-body ul li:last-child {
     margin-bottom: 0 !important;
 }
 
-/* Adjusts the default Bootstrap arrow color indicator hue context mapping */
+/* Recolors the default Bootstrap layout chevron indicator arrow to match Muted Sage Green */
 .custom-faq-accordion .accordion-button::after {
-    filter: hue-rotate(100deg) brightness(0.8);
+    filter: hue-rotate(115deg) brightness(0.6) contrast(1.1);
 }

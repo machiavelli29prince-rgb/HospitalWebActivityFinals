@@ -350,126 +350,146 @@
         </div>
     </section>
 
-    <section id="faq" class="light-gray-1">
-        <div class="py-7">
-            <div class="container py-5  py-md-7">
-                <div class="row justify-content-center">
-                    <div class="text-center col-lg-6">
-                        <h2 class="h2 text-color">FAQ</h2>
-                        <p class="paragraph second-text-color" style="margin-top: 10px">Problems trying to resolve the
-                            conflict between
-                            the two major realms of Classical physics: Newtonian mechanics </p>
+    <section id="faq" class="light-gray-1 py-7" style="background-color: #ffffff !important;">
+    <div class="container py-5 py-md-7">
+        <div class="row justify-content-center">
+            <div class="text-center col-lg-8 mb-5">
+                <h2 class="h2 text-color fw-bold" style="font-size: 2.2rem;">FAQ</h2>
+                <p class="paragraph second-text-color mt-3 px-md-5">
+                    Explore our comprehensive guide to frequently asked queries regarding medical care delivery pipelines, patient hospitality scheduling protocols, and network coverage framework portfolios.
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4 mb-4">
+                <div class="accordion custom-faq-accordion" id="faqGroup1">
+                    <div class="accordion-item border-0 overflow-hidden">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                What medical services do you provide?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqGroup1">
+                            <div class="accordion-body">
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>24/7 Critical emergency care and trauma response.</li>
+                                    <li>Multidisciplinary outpatient specialty consultations.</li>
+                                    <li>Advanced diagnostic imaging and comprehensive laboratory analyses.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="container mt-5">
-                <div class="row align-items-stretch">
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div class="d-flex card-item bg-green-light" style="padding: 25px 25px">
-                            <div class="d-flex"><i class="bi bi-chevron-right icn-xs text-green-primary"></i>
-                                <div style="margin-left: 20px">
-                                    <h5 class="h5 text-color">the quick fox jumps over the
-                                        lazy dog</h5>
-                                    <h6 class="h6 second-text-color" style="margin-top: 5px">Things on a very small
-                                        scale
-                                        behave like nothing </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div class="d-flex card-item bg-green-light" style="padding: 25px 25px">
-                            <div class="d-flex"><i class="bi bi-chevron-right icn-xs text-green-primary"></i>
-                                <div style="margin-left: 20px">
-                                    <h5 class="h5 text-color">the quick fox jumps over the
-                                        lazy dog</h5>
-                                    <h6 class="h6 second-text-color" style="margin-top: 5px">Things on a very small
-                                        scale
-                                        behave like nothing</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 ">
-                        <div class="d-flex card-item bg-green-light" style="padding: 25px 25px">
-                            <div class="d-flex"><i class="bi bi-chevron-right icn-xs text-green-primary"></i>
-                                <div style="margin-left: 20px">
-                                    <h5 class="h5 text-color">the quick fox jumps over the
-                                        lazy dog</h5>
-                                    <h6 class="h6 second-text-color" style="margin-top: 5px">Things on a very small
-                                        scale
-                                        behave like nothing </h6>
-                                </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="accordion custom-faq-accordion" id="faqGroup2">
+                    <div class="accordion-item border-0 overflow-hidden">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How do I book a doctor appointment?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqGroup2">
+                            <div class="accordion-body">
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Secure real-time coordination via the online patient portal.</li>
+                                    <li>Direct telephone booking through our central concierge hotline.</li>
+                                    <li>On-site registration at the main outpatient desk.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="row align-items-stretch mt-4">
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div class="d-flex card-item bg-green-light" style="padding: 25px 25px">
-                            <div class="d-flex"><i class="bi bi-chevron-right icn-xs text-green-primary"></i>
-                                <div style="margin-left: 20px">
-                                    <h5 class="h5 text-color">the quick fox jumps over the
-                                        lazy dog</h5>
-                                    <h6 class="h6 second-text-color" style="margin-top: 5px">Things on a very small
-                                        scale
-                                        behave like</h6>
-                                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="accordion custom-faq-accordion" id="faqGroup3">
+                    <div class="accordion-item border-0 overflow-hidden">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Which insurance plans do you accept?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqGroup3">
+                            <div class="accordion-body">
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Full PhilHealth case-rate benefits allocation.</li>
+                                    <li>Accredited private HMO corporate plan frameworks.</li>
+                                    <li>International health insurance networks for global patients.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div class="d-flex card-item bg-green-light" style="padding: 25px 25px">
-                            <div class="d-flex"><i class="bi bi-chevron-right icn-xs text-green-primary"></i>
-                                <div style="margin-left: 20px">
-                                    <h5 class="h5 text-color">the quick fox jumps over the
-                                        lazy dog</h5>
-                                    <h6 class="h6 second-text-color" style="margin-top: 5px">Things on a very small
-                                        scale
-                                        behave like</h6>
-                                </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="accordion custom-faq-accordion" id="faqGroup4">
+                    <div class="accordion-item border-0 overflow-hidden">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                What are your emergency room hours?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqGroup4">
+                            <div class="accordion-body">
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Continuous 24/7 operational capability for urgent cases.</li>
+                                    <li>Full staffing during holidays and weekend shifts.</li>
+                                    <li>On-call surgical teams prepared for immediate mobilization.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div class="d-flex card-item bg-green-light" style="padding: 25px 25px">
-                            <div class="d-flex"><i class="bi bi-chevron-right icn-xs text-green-primary"></i>
-                                <div style="margin-left: 20px">
-                                    <h5 class="h5 text-color">the quick fox jumps over the
-                                        lazy dog</h5>
-                                    <h6 class="h6 second-text-color" style="margin-top: 5px">Things on a very small
-                                        scale
-                                        behave like</h6>
-                                </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="accordion custom-faq-accordion" id="faqGroup5">
+                    <div class="accordion-item border-0 overflow-hidden">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                How can I request medical records?
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqGroup5">
+                            <div class="accordion-body">
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Formal request submission via the health information window.</li>
+                                    <li>Verification through verified government-issued identification keys.</li>
+                                    <li>Standard processing timeline of 3 to 5 business days.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="accordion custom-faq-accordion" id="faqGroup6">
+                    <div class="accordion-item border-0 overflow-hidden">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                Are hospital visitor hours restricted?
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqGroup6">
+                            <div class="accordion-body">
+                                <ul class="ps-3 mb-0" style="list-style-type: disc;">
+                                    <li>Standard visitor clearance from 8:00 AM to 8:00 PM daily.</li>
+                                    <li>Maximum allowance of two visitors per patient room.</li>
+                                    <li>Specialized units require attending nurse station approval.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <section class="dark-background-color">
-        <div class="container py-5 py-md-7">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-md-5 mb-4 mb-lg-0">
-                    <h2 class="h2 light-text-color">Get In Touch</h2>
-                    <p class="paragraph light-text-color" style="margin-top: 15px">The gradual accumulation of
-                        information about atomic and
-                        small-scale behaviour during the first quarter of the 20th </p>
-                </div>
-                <div class="col-lg-5 col-md-6">
-                    <div class="form-group">
-                        <div class="input-group input-style-2 mb-2 mr-sm-2"><input class="form-control" type="text"
-                                placeholder="Your Email"></input>
-                            <div class="input-group-append mt-2 mt-sm-0"><button
-                                    class="btn bg-green-accent h-100"><span>Subscribe</span></button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <footer class="position-relative">
         <div>

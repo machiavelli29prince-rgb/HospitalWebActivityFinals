@@ -66,7 +66,7 @@ class Appointment {
 
    $this->db->query("SELECT * FROM appointments WHERE id = '$this->id'");
     return $this->db->single();
-}
+    }
 
     function getAppointment(){
         $this->db->query("SELECT * FROM appointments WHERE id = :id");

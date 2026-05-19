@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../css/aos.css">
     <link rel="stylesheet" href="../css/bootstrap-icons.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         /* Smooth scrolling behavior for navigation anchors */
         html {
@@ -111,7 +113,7 @@
                     <div class="card-item round bg-green-light" style="padding: 40px 40px">
                         <h3 class="h3 text-color text-center">Book Appointment</h3>
                         
-                        <form action="process-appointment.php" method="POST">
+                        <form id="appointmentForm" action="process-appointment.php" method="POST">
                             <div class="card-content" style="margin-top: 40px">
                                 
                                 <div class="form-group"><label class="h6">Name *</label>
@@ -571,8 +573,53 @@
     <script src="../js/aos.js"></script>
     <script src="../js/tools.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        // Intercept form submission to show confirmation question window
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            var form = this;
+
+            Swal.fire({
+                title: 'Confirm Booking Request?',
+                text: "Please double check your department and slot timings before submitting.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#2e7d32', 
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, Submit Request',
+                cancelButtonText: 'Review Details'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
     </script>
+
+    <?php if (isset($_GET['added'])): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Appointment Booked!',
+            text: 'Your medical booking request has been submitted successfully.',
+            confirmButtonColor: '#2e7d32'
+        });
+    </script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['error'])): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Booking Failed',
+            text: 'An error occurred while connecting with system logs. Please try again.',
+            confirmButtonColor: '#d33'
+        });
+    </script>
+    <?php endif; ?>
 </body>
 
 </html>

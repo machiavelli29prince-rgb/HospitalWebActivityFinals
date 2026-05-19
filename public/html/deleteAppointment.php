@@ -11,7 +11,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     // Execute the database delete query built inside the class library
     if ($appointment->deleteAppointment()) {
         // Automatically bounce back to the doctor dashboard view with a deletion query flag
-        header("Location: doctor.php?deleted=1");
+        header("Location: users.php?deleted=1");
         exit();
     } else {
         echo "Error: Unable to process data removal at this time.";

@@ -86,12 +86,18 @@
                     </ul>
                     
                     <ul class="navbar-nav mt-4 mt-lg-0 ms-auto align-items-center">
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a class="btn btn-outline-success btn-sm px-3 fw-bold" href="users.php">
+                            <i class="bi bi-person-badge"></i> Patient Portal
+                        </a>
+                    </li>
                         <li class="nav-item me-lg-2 mb-2 mb-lg-0">
                             <a href="doctor.php" class="btn btn-outline-light py-2 px-3" style="border-radius: 4px; text-decoration: none;">
                                 <i class="bi bi-shield-lock me-2" style="margin-right: 5px;"></i>Doctor Portal
                             </a>
                         </li>
                     </ul>
+                    
                 </div>
             </nav>
         </div>

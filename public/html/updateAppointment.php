@@ -2,14 +2,39 @@
 require_once("appointLib.php");
 
 $appointment = new Appointment();
-$currentPatient = null;
 
-// Catch the incoming entry row identifier to load target workspace files
+// Handle form submission from the Patient Portal (users.php)
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
+    
+    // Bind form variables to class fields
+    $appointment->setId($_POST['id']);
+    $appointment->setName($_POST['name']);
+    $appointment->setEmail($_POST['email']);
+    $appointment->setDepartment($_POST['department']);
+    $appointment->setTime($_POST['time']);
+
+    // Execute database update query rule
+    if ($appointment->updateAppointment()) {
+        // Determine where the user came from to redirect them appropriately
+        if (isset($_POST['update']) && $_POST['update'] == "1") {
+            // Redirect back to the Patient Portal with success parameter
+            header("Location: users.php?updated=1");
+        } else {
+            // Safe fallback rule for legacy doctor panel
+            header("Location: doctor.php?updated=1");
+        }
+        exit();
+    } else {
+        echo "Error: Failed to synchronize and save your appointment schedule updates.";
+    }
+}
+
+// Legacy GET request routing block (Used when loading the separate standalone edit page)
+$currentPatient = null;
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $appointment->setId($_GET['id']);
     $currentPatient = $appointment->getAppointment();
     
-    // If no row record returned match tracking IDs, redirect out safely
     if (!$currentPatient) {
         header("Location: doctor.php");
         exit();
@@ -17,21 +42,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 } else {
     header("Location: doctor.php");
     exit();
-}
-
-// Intercept form modification submission triggers
-if (isset($_POST['update'])) {
-    $appointment->setName($_POST['name']);
-    $appointment->setEmail($_POST['email']);
-    $appointment->setDepartment($_POST['department']);
-    $appointment->setTime($_POST['time']); // Aligned to the 'time' schema column parameter
-
-    if ($appointment->updateAppointment()) {
-        header("Location: doctor.php?updated=1");
-        exit();
-    } else {
-        $errorMessage = "Failed to synchronize changes with system logs.";
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -42,64 +52,61 @@ if (isset($_POST['update'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body { background-color: #f5f5f5; }
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; }
-        .bg-green-light { background-color: #e8f5e9 !important; }
     </style>
 </head>
-<body class="light-gray-1">
-
-    <div class="container py-7">
+<body>
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="card-item round bg-white border p-4 p-md-5 shadow-sm">
-                    <h3 class="h3 text-color font-weight-bold text-center">Modify Schedule File</h3>
-                    <p class="paragraph second-text-color text-center small mt-1">Adjust active record properties below to update tracking queues.</p>
-                    <hr class="my-4">
-
-                    <form action="updateAppointment.php?id=<?php echo $appointment->getId(); ?>" method="POST">
-                        
-                        <div class="form-group mb-3">
-                            <label class="h6">Patient Name *</label>
-                            <input class="form-control mt-1" type="text" name="name" value="<?php echo htmlspecialchars($currentPatient->name); ?>" required>
-                        </div>
-                        
-                        <div class="form-group mb-3" style="margin-top: 15px;">
-                            <label class="h6">Email Communication File *</label>
-                            <input class="form-control mt-1" type="email" name="email" value="<?php echo htmlspecialchars($currentPatient->email); ?>" required>
-                        </div>
-                        
-                        <div class="form-group mb-3" style="margin-top: 15px;">
-                            <label class="h6">Department *</label>
-                            <select class="custom-select form-control mt-1" name="department" required>
-                                <option value="General Medicine" <?php echo ($currentPatient->department == 'General Medicine') ? 'selected' : ''; ?>>General Medicine</option>
-                                <option value="Cardiology" <?php echo ($currentPatient->department == 'Cardiology') ? 'selected' : ''; ?>>Cardiology</option>
-                                <option value="Pediatrics" <?php echo ($currentPatient->department == 'Pediatrics') ? 'selected' : ''; ?>>Pediatrics</option>
-                                <option value="Neurology" <?php echo ($currentPatient->department == 'Neurology') ? 'selected' : ''; ?>>Neurology</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group mb-4" style="margin-top: 15px; margin-bottom: 30px;">
-                            <label class="h6">Time *</label>
-                            <select class="custom-select form-control mt-1" name="time" required>
-                                <option value="09:00 AM" <?php echo ($currentPatient->time == '09:00 AM') ? 'selected' : ''; ?>>09:00 AM Available</option>
-                                <option value="11:00 AM" <?php echo ($currentPatient->time == '11:00 AM') ? 'selected' : ''; ?>>11:00 AM Available</option>
-                                <option value="02:00 PM" <?php echo ($currentPatient->time == '02:00 PM') ? 'selected' : ''; ?>>02:00 PM Available</option>
-                                <option value="04:00 PM" <?php echo ($currentPatient->time == '04:00 PM') ? 'selected' : ''; ?>>04:00 PM Available</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" name="update" class="btn bg-green-primary w-100 py-2">
-                            <span>Save Changes</span>
-                        </button>
-                        <a href="doctor.php" class="btn btn-outline-secondary w-100 mt-2 py-2" style="margin-top: 10px; display: block; text-align: center; text-decoration: none;">
-                            <span>Cancel</span>
-                        </a>
-                    </form>
+            <div class="col-md-6">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-green-primary text-white p-3">
+                        <h4 class="m-0">Edit Appointment Record</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="updateAppointment.php" method="POST">
+                            <input type="hidden" name="id" value="<?php echo $currentPatient->id; ?>">
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Full Name</label>
+                                <input type="text" class="form-control" name="name" value="<?php echo $currentPatient->name; ?>" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Email Address</label>
+                                <input type="email" class="form-control" name="email" value="<?php echo $currentPatient->email; ?>" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Department</label>
+                                <select class="form-control" name="department" required>
+                                    <option value="General Medicine" <?php echo ($currentPatient->department == 'General Medicine') ? 'selected' : ''; ?>>General Medicine</option>
+                                    <option value="Cardiology" <?php echo ($currentPatient->department == 'Cardiology') ? 'selected' : ''; ?>>Cardiology</option>
+                                    <option value="Pediatrics" <?php echo ($currentPatient->department == 'Pediatrics') ? 'selected' : ''; ?>>Pediatrics</option>
+                                    <option value="Neurology" <?php echo ($currentPatient->department == 'Neurology') ? 'selected' : ''; ?>>Neurology</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Time Slot</label>
+                                <select class="form-control" name="time" required>
+                                    <option value="09:00 AM" <?php echo ($currentPatient->time == '09:00 AM') ? 'selected' : ''; ?>>09:00 AM</option>
+                                    <option value="11:00 AM" <?php echo ($currentPatient->time == '11:00 AM') ? 'selected' : ''; ?>>11:00 AM</option>
+                                    <option value="02:00 PM" <?php echo ($currentPatient->time == '02:00 PM') ? 'selected' : ''; ?>>02:00 PM</option>
+                                    <option value="04:00 PM" <?php echo ($currentPatient->time == '04:00 PM') ? 'selected' : ''; ?>>04:00 PM</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn bg-green-primary w-100 fw-bold py-2 mb-2">Save Changes</button>
+                            <a href="doctor.php" class="btn btn-outline-secondary w-100">Cancel</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

@@ -4,7 +4,7 @@ require_once("db.php");
 
 class Appointment {
 
-    private $id;
+    public $id;
     private $name;
     private $email;
     private $department;
@@ -62,6 +62,11 @@ class Appointment {
         $this->db->bind(":department", $department);
         return $this->db->set();
     }
+    public function getAppointmentById(){
+
+   $this->db->query("SELECT * FROM appointments WHERE id = '$this->id'");
+    return $this->db->single();
+}
 
     function getAppointment(){
         $this->db->query("SELECT * FROM appointments WHERE id = :id");
@@ -96,5 +101,8 @@ class Appointment {
         $this->db->bind(":id", $this->id);
         return $this->db->execute();
     }
+    
 }
+
+
 ?>

@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the insertion block
     if ($appointment->addAppointment()) {
-        echo "<script>alert('Appointment booked successfully using groupmate library!'); window.location.href='index.php';</script>";
+        echo "<script>alert('Appointment booked successfully using groupmate library!'); window.location.href='users.php?added=1';</script>";
     } else {
         echo "<script>alert('Failed to save appointment. Check db.php configurations.'); window.location.href='index.php';</script>";
     }

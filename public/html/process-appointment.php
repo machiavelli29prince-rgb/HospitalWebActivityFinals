@@ -1,23 +1,28 @@
 <?php
-// Includes library file
+session_start();
 require_once 'appointLib.php';
 
+// Verification check: Ensure only logged-in patients can trigger data insertion loops
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
+    header("Location: auth.php");
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Instantiate library class
     $appointment = new Appointment();
 
-    // Pass form input values into the class properties
+    // Map system tracking keys directly from explicit active user session data parameters
+    $appointment->setUserId($_SESSION['user_id']);
     $appointment->setName($_POST['name']);
     $appointment->setEmail($_POST['email']);
     $appointment->setDepartment($_POST['department']);
     $appointment->setTime($_POST['time']);
 
-    // Execute the insertion block
     if ($appointment->addAppointment()) {
-        echo "<script>window.location.href='users.php?added=1';</script>";
+        header("Location: users.php?added=1");
     } else {
-        echo "<script>window.location.href='index.php';</script>";
+        header("Location: users.php?error=1");
     }
+    exit();
 }
 ?>

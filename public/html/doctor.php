@@ -1,5 +1,12 @@
 <?php
-// Includes library file
+session_start();
+
+// Strict Access Rules: Redirect unauthorized accounts back to index homepage panel
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
+    header("Location: index.php#auth-section");
+    exit();
+}
+
 require_once 'appointLib.php';
 $appointmentLib = new Appointment();
 
@@ -10,177 +17,87 @@ if (!in_array($current_dept, $departments)) {
     $current_dept = "General Medicine";
 }
 
-// Invoke the department filter method
 $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
 ?>
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="en">
 <head>
     <title>Doctor Dashboard - Rodencia</title>
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/animate.min.css">
-    <link rel="stylesheet" href="../css/aos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap-icons.css">
-
     <style>
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; }
-        .bg-green-primary:hover { background-color: #1b5e20 !important; }
-        
         .bg-green-light { background-color: #e8f5e9 !important; }
         .text-green-primary { color: #2e7d32 !important; }
-
-        /* Custom Styles for Tab Layout */
-        .dept-nav-link {
-            display: block;
-            padding: 15px 20px;
-            color: #495057;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            border-left: 4px solid transparent;
-        }
-        .dept-nav-link:hover {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-        }
-        .dept-nav-link.active-tab {
-            background-color: #e8f5e9 !important;
-            color: #2e7d32 !important;
-            border-left: 4px solid #2e7d32;
-        }
+        .sidebar-link.active { background-color: #2e7d32 !important; color: white !important; font-weight: bold; }
     </style>
 </head>
+<body class="bg-light">
 
-<body>
-
-    <header class="bg-dark position-relative" data-aos="fade-down" style="padding-bottom: 20px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-green-primary shadow-sm py-3 mb-4">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark py-4">
-                <a class="navbar-brand" href="index.php">
-                    <h1 class="h3 mt-0">Rodencia <span class="h6 text-muted">Portal</span></h1>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-target="#doctorNav"
-                    data-bs-toggle="collapse" aria-controls="doctorNav" aria-expanded="false"
-                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                
-                <div class="collapse navbar-collapse ms-lg-5 mt-4 mt-lg-0" id="doctorNav">
-                    <ul class="navbar-nav align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="index.php"><span>Main Site</span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="doctor.php"><span>Doctor Schedule</span></a></li>
-                    </ul>
-                    <ul class="navbar-nav mt-4 mt-lg-0 ms-auto align-items-center">
-                        <li class="nav-item ms-lg-4 mt-4 mt-lg-0">
-                            <a href="index.php" class="btn bg-green-primary text-white text-decoration-none">
-                                <span class="btn-text">Book New Patient</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <a class="navbar-brand fw-bold" href="#">Rodencia Staff Panel</a>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <span class="text-white small fw-bold"><i class="bi bi-shield-lock-fill"></i> Specialist: <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                <a href="logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="py-7 py-lg-9 light-gray-1" style="min-height: 70vh;">
-        <div class="container">
+    <main class="container py-4">
+        <div class="row">
             
-            <div class="row mb-4" data-aos="fade-up">
-                <div class="col-12">
-                    <a href="index.php" class="btn btn-outline-secondary py-2 px-3" style="border-radius: 4px; text-decoration: none; font-weight: 600;">
-                        <i class="bi bi-arrow-left me-2" style="margin-right: 8px;"></i>Return to Main Site
-                    </a>
-                </div>
-            </div>
-            
-            <div class="row mb-5" data-aos="fade-up">
-                <div class="col-10">
-                    <h2 class="h2 text-color">Medical Staff Schedule</h2>
-                    <p class="paragraph second-text-color mt-2">
-                        Select a clinical department sidebar tab below to review active patient queue files and booked operational blocks.
-                    </p>
-                </div>
-            </div>
-
-            <div class="row align-items-start mt-4">
-                
-                <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right">
-                    <div class="card-item round bg-white p-4 border shadow-sm">
-                        <h5 class="h5 text-color font-weight-bold mb-4" style="margin-bottom: 20px;">Clinical Fields</h5>
-                        
-                        <div class="navigation-tabs-wrapper">
-                            <?php foreach ($departments as $dept): ?>
-                                <a href="doctor.php?dept=<?php echo urlencode($dept); ?>" 
-                                   class="dept-nav-link <?php echo ($current_dept === $dept) ? 'active-tab' : ''; ?>">
-                                    <i class="bi bi-shield-plus me-2" style="margin-right: 10px;"></i>
-                                    <?php echo $dept; ?>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
+            <div class="col-lg-3 mb-4">
+                <div class="card border shadow-sm p-3 bg-white">
+                    <h6 class="fw-bold text-muted mb-3 small text-uppercase">Department Nodes</h6>
+                    <div class="nav flex-column nav-pills">
+                        <?php foreach ($departments as $dept): ?>
+                            <a href="doctor.php?dept=<?php echo urlencode($dept); ?>" 
+                               class="nav-link p-3 mb-2 text-dark <?php echo ($current_dept === $dept) ? 'active' : 'bg-light'; ?>">
+                                <i class="bi bi-heart-pulse-fill me-2"></i> <?php echo $dept; ?>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-8" data-aos="fade-left">
-                    <div class="card-item round bg-white p-4 p-md-5 border shadow-sm h-100">
-                        
-                        <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4" style="margin-bottom: 30px; padding-bottom: 15px;">
-                            <div>
-                                <h3 class="h3 text-color font-weight-bold"><?php echo $current_dept; ?> Queue</h3>
-                                <span class="badge bg-green-primary mt-1"><?php echo count($patient_list); ?> Confirmed Active</span>
-                            </div>
-                            <div class="icn-circle circle-md bg-green-light"><i class="bi bi-calendar-check text-green-primary"></i></div>
-                        </div>
-
+            <div class="col-lg-9">
+                <div class="card border shadow-sm bg-white">
+                    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                        <h5 class="m-0 fw-bold text-green-primary"><?php echo htmlspecialchars($current_dept); ?> Queue</h5>
+                        <span class="badge bg-green-primary px-3 py-2"><?php echo count($patient_list); ?> Pinned</span>
+                    </div>
+                    <div class="card-body p-0">
                         <?php if (empty($patient_list)): ?>
-                            <div class="text-center py-5">
-                                <i class="bi bi-clipboard-x text-muted display-4 d-block mb-3" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                                <h5 class="h5 second-text-color">No upcoming appointments found</h5>
-                                <p class="paragraph text-muted small mt-1">There are no patient data profiles submitted for this tracking parameter row yet.</p>
-                            </div>
+                            <div class="p-5 text-center text-muted">No active appointment records found.</div>
                         <?php else: ?>
-                            
                             <div class="table-responsive">
-                                <table class="table table-hover align-middle">
-                                    <thead class="bg-green-light">
+                                <table class="table align-middle mb-0 table-hover">
+                                    <thead class="bg-light text-secondary small fw-bold">
                                         <tr>
-                                            <th class="py-3 px-3 border-0 rounded-start">Patient Name</th>
-                                            <th class="py-3 px-3 border-0">Email Communication File</th>
-                                            <th class="py-3 px-3 border-0">Operational Block</th>
-                                            <th class="py-3 px-3 border-0 rounded-end text-end">Actions</th>
+                                            <th class="p-3">Patient Name</th>
+                                            <th class="p-3">Email Address</th>
+                                            <th class="p-3">Reserved Time Block</th>
+                                            <th class="p-3 text-center">Controls</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="small">
                                         <?php foreach ($patient_list as $patient): ?>
                                             <tr>
-                                                <td class="py-3 px-3 font-weight-bold text-color">
-                                                    <i class="bi bi-person me-2 text-green-primary" style="margin-right: 8px;"></i>
-                                                    <?php echo htmlspecialchars($patient->name); ?>
-                                                </td>
-                                                <td class="py-3 px-3 second-text-color">
-                                                    <?php echo htmlspecialchars($patient->email); ?>
-                                                </td>
-                                                <td class="py-3 px-3">
+                                                <td class="p-3 fw-bold"><?php echo htmlspecialchars($patient->name); ?></td>
+                                                <td class="p-3 text-muted"><?php echo htmlspecialchars($patient->email); ?></td>
+                                                <td class="p-3">
                                                     <span class="badge bg-green-light text-green-primary px-3 py-2">
-                                                        <i class="bi bi-clock me-1" style="margin-right: 4px;"></i>
                                                         <?php echo htmlspecialchars($patient->time); ?>
                                                     </span>
                                                 </td>
-                                                <td class="py-3 px-3 text-end">
-                                                    <a href="updateAppointment.php?id=<?php echo $patient->id; ?>" 
-                                                       class="btn btn-sm btn-outline-primary py-1 px-2 me-1" 
-                                                       style="border-radius: 4px; text-decoration: none; font-size: 0.85rem; margin-right: 5px;">
-                                                        <i class="bi bi-pencil-square"></i> Edit
-                                                    </a>
+                                                <td class="p-3 text-center">
                                                     <a href="deleteAppointment.php?id=<?php echo $patient->id; ?>" 
-                                                       class="btn btn-sm btn-outline-danger py-1 px-2" 
-                                                       onclick="return confirm('Are you sure you want to cancel this scheduled operational appointment?');"
-                                                       style="border-radius: 4px; text-decoration: none; font-size: 0.85rem;">
-                                                        <i class="bi bi-trash-fill"></i> Cancel
+                                                       class="btn btn-sm btn-outline-danger px-3"
+                                                       onclick="return confirm('Remove this appointment permanently?');">
+                                                        Remove
                                                     </a>
                                                 </td>
                                             </tr>
@@ -188,33 +105,12 @@ $patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
                                     </tbody>
                                 </table>
                             </div>
-                            
                         <?php endif; ?>
-
                     </div>
                 </div>
-
             </div>
+
         </div>
     </main>
-
-    <footer class="light-gray-1 border-top">
-        <div class="container py-4">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-6">
-                    <h6 class="h6 second-text-color text-md-center m-0">Made With Love All Right Reserved</h6>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/aos.js"></script>
-    <script src="../js/tools.js"></script>
-    <script>
-        AOS.init();
-    </script>
 </body>
-
 </html>

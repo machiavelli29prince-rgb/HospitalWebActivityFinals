@@ -1,3 +1,79 @@
+<?php
+// 1. TEMPORARY TROUBLESHOOTING: Force errors to display if something breaks
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+
+// 2. Load your groupmate's library file safely
+if (!file_exists('appointLib.php')) {
+    die("<div style='padding:20px; background:#ffebee; color:#c62828; font-family:sans-serif;'>
+            <strong>Critical System Error:</strong> <code>appointLib.php</code> could not be found in this directory. 
+            Please make sure the library file is in the exact same folder as this index.php file.
+         </div>");
+}
+
+require_once 'appointLib.php';
+$appLib = new Appointment();
+
+$error = '';
+$success = '';
+
+// 3. Process Account Registration and Sign-In Submissions
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Process Account Registration Action
+    if (isset($_POST['signup'])) {
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        $role = $_POST['role'];
+
+        if (!empty($name) && !empty($email) && !empty($password) && !empty($role)) {
+            if ($appLib->getUserByEmail($email)) {
+                $error = "This email is already registered in our system.";
+            } else {
+                if ($appLib->registerUser($name, $email, $password, $role)) {
+                    $success = "Account created successfully! You can now log in.";
+                } else {
+                    $error = "An error occurred while creating your account.";
+                }
+            }
+        } else {
+            $error = "Please fill out all mandatory registration fields.";
+        }
+    }
+
+    // Process System Authentication Action
+    if (isset($_POST['login'])) {
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+
+        if (!empty($email) && !empty($password)) {
+            $user = $appLib->getUserByEmail($email);
+            
+            if ($user && password_verify($password, $user->password)) {
+                $_SESSION['user_id'] = $user->id;
+                $_SESSION['user_name'] = $user->name;
+                $_SESSION['user_email'] = $user->email;
+                $_SESSION['user_role'] = $user->role;
+
+                if ($user->role === 'doctor') {
+                    header("Location: doctor.php");
+                } else {
+                    header("Location: users.php");
+                }
+                exit();
+            } else {
+                $error = "Invalid email or password combination.";
+            }
+        } else {
+            $error = "Please fill out all credential spaces.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -62,105 +138,110 @@
         .modal-backdrop {
             z-index: 1050 !important;
         }
+
+        /* Form Switch Tabs */
+        .auth-tab { cursor: pointer; padding: 12px; text-align: center; font-weight: bold; border-bottom: 2px solid transparent; transition: 0.2s ease; }
+        .auth-tab.active { border-bottom: 2px solid #2e7d32; color: #2e7d32; background-color: #f8f9fa; }
     </style>
 </head>
 
 <body>
 
-    <header id="home" class="position-relative" data-aos="fade-down">
-        <div class="background position-absolute z-index_-1 w-100 h-100"><img class="cover"
-                src="../img/hero-cover.5.jpg"></img>
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    ?>
+    <header class="position-relative" data-aos="fade-down">
+        <div class="background position-absolute z-index_-1 w-100 h-100">
+            <img class="cover" src="../img/hero-cover.5.jpg" alt="Cover Image">
             <div class="filter basic"></div>
         </div>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark py-4"><a class="navbar-brand" href="#home">
+            <nav class="navbar navbar-expand-lg navbar-dark py-4">
+                <a class="navbar-brand" href="#">
                     <h1 class="h3 mt-0">Rodencia</h1>
-                </a><button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
                     data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                
-                <div class="collapse navbar-collapse ms-lg-5  mt-4 mt-lg-0" id="navbarSupportedContent">
-                    <ul class="navbar-nav align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="#home"><span>Home</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team"><span>Our Team</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#departments"><span>Departments</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#faq"><span>FAQ</span></a></li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#auth-section">Access Portal</a></li>
                     </ul>
-                    
-                    <ul class="navbar-nav mt-4 mt-lg-0 ms-auto align-items-center">
-                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a class="btn btn-outline-success btn-sm px-3 fw-bold" href="users.php">
-                            <i class="bi bi-person-badge"></i> Patient Portal
-                        </a>
-                    </li>
-                        <li class="nav-item me-lg-2 mb-2 mb-lg-0">
-                            <a href="doctor.php" class="btn btn-outline-light py-2 px-3" style="border-radius: 4px; text-decoration: none;">
-                                <i class="bi bi-shield-lock me-2" style="margin-right: 5px;"></i>Doctor Portal
-                            </a>
-                        </li>
-                    </ul>
-                    
                 </div>
             </nav>
-        </div>
-        <div class="container py-5">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-6 col-xl-5 my-5 my-lg-0 text-center text-md-start">
-                    <h1 class="h1 light-text-color mt-0">Welcome to Rodencia</h1>
-                    <h4 class="h4 light-text-color" style="margin-top: 35px">Book an appointment with our wonderful doctors!</h4>
+            
+            <div class="row align-items-center justify-content-between header-body" style="padding: 120px 0 160px 0;">
+                <div class="col-lg-6 text-white">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInUp">Meet the Best Hospital Management System</h1>
+                    <p class="lead opacity-75 my-4 animate__animated animate__fadeInUp animate__delay-1s">
+                        Our centralized medical records routing architecture lets patients reserve consultations and doctors evaluate department data metrics natively.
+                    </p>
+                    <a href="#auth-section" class="btn bg-green-accent px-4 py-2.5 text-white fw-bold shadow animate__animated animate__fadeInUp animate__delay-2s" style="border-radius: 4px; text-decoration: none;">
+                        Get Started / Sign In <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
                 </div>
-                <div class="col-lg-6 col-xl-4">
-                    <div class="card-item round bg-green-light" style="padding: 40px 40px">
-                        <h3 class="h3 text-color text-center">Book Appointment</h3>
+
+                <div class="col-lg-5 mt-5 mt-lg-0" id="auth-section">
+                    <div class="card bg-white text-dark shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
                         
-                        <form id="appointmentForm" action="process-appointment.php" method="POST">
-                            <div class="card-content" style="margin-top: 40px">
-                                
-                                <div class="form-group"><label class="h6">Name *</label>
-                                    <div class="form-group" style="margin-top: 10px">
-                                        <input class="form-control" type="text" name="name" placeholder="Full Name * " required></input>
-                                    </div>
+                        <div class="row g-0 border-bottom">
+                            <div class="col-6 auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Sign In</div>
+                            <div class="col-6 auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Create Account</div>
+                        </div>
+
+                        <div class="card-body p-4">
+                            <?php if(!empty($error)): ?>
+                                <div class="alert alert-danger p-2 small"><?php echo htmlspecialchars($error); ?></div>
+                            <?php endif; ?>
+                            <?php if(!empty($success)): ?>
+                                <div class="alert alert-success p-2 small"><?php echo htmlspecialchars($success); ?></div>
+                            <?php endif; ?>
+
+                            <form id="form-login-block" action="index.php#auth-section" method="POST">
+                                <h5 class="fw-bold text-dark mb-3">Welcome Back</h5>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Email Address</label>
+                                    <input type="email" name="email" class="form-control" required autocomplete="username">
                                 </div>
-                                
-                                <div class="form-group" style="margin-top: 10px"><label class="h6">Email address *</label>
-                                    <div class="form-group" style="margin-top: 10px">
-                                        <input class="form-control" type="email" name="email" placeholder="example@gmail.com" required></input>
-                                    </div>
+                                <div class="mb-4">
+                                    <label class="form-label small fw-bold">Password</label>
+                                    <input type="password" name="password" class="form-control" required autocomplete="current-password">
                                 </div>
-                                
-                                <div class="form-group" style="margin-top: 10px"><label class="h6">Department *</label>
-                                    <div class="form-group" style="margin-top: 10px">
-                                        <select class="custom-select form-control" name="department" style="margin-top: 10px" required>
-                                            <option value="">Please Select</option>
-                                            <option value="General Medicine">General Medicine</option>
-                                            <option value="Cardiology">Cardiology</option>
-                                            <option value="Pediatrics">Pediatrics</option>
-                                            <option value="Neurology">Neurology</option>
-                                        </select>
-                                    </div>
+                                <button type="submit" name="login" class="btn bg-green-primary text-white w-100 py-2 fw-bold shadow-sm">Sign Into System</button>
+                            </form>
+
+                            <form id="form-signup-block" action="index.php#auth-section" method="POST" style="display: none;">
+                                <h5 class="fw-bold text-green-primary mb-3">Registration Form</h5>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Full Name</label>
+                                    <input type="text" name="name" class="form-control" required autocomplete="name">
                                 </div>
-                                
-                                <div class="form-group" style="margin-top: 10px"><label class="h6">Time *</label>
-                                    <div class="form-group" style="margin-top: 10px">
-                                        <select class="custom-select form-control" name="time" required>
-                                            <option value="">Select a time</option>
-                                            <option value="09:00 AM">09:00 AM Available</option>
-                                            <option value="11:00 AM">11:00 AM Available</option>
-                                            <option value="02:00 PM">02:00 PM Available</option>
-                                            <option value="04:00 PM">04:00 PM Available</option>
-                                        </select>
-                                    </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Email Address</label>
+                                    <input type="email" name="email" class="form-control" required autocomplete="email">
                                 </div>
-                                
-                            </div>
-                            
-                            <button type="submit" class="btn bg-green-primary w-100" style="margin-top: 40px">
-                                <span>Book Appointment</span>
-                            </button>
-                        </form>
-                        
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Secure Password</label>
+                                    <input type="password" name="password" class="form-control" required autocomplete="new-password">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">System Role</label>
+                                    <select name="role" class="form-select" required>
+                                        <option value="patient">Patient System Client</option>
+                                        <option value="doctor">Medical Specialist Staff (Doctor)</option>
+                                    </select>
+                                </div>
+                                <button type="submit" name="signup" class="btn btn-dark text-white w-100 py-2 fw-bold shadow-sm">Register Credentials</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </header>
@@ -305,7 +386,9 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
-                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-heart-pulse text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3">
+                                <img src="../img/genmed.png" alt="General Medicine Icon" class="dept-icon-img">
+                            </div>
                             <h5 class="h5 text-color font-weight-bold">General Medicine</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
                             <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Karl Armand</p>
@@ -314,11 +397,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
-                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-activity text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3">
+                                <img src="../img/cardio.jpg" alt="Cardiology Icon" class="dept-icon-img">
+                            </div>
                             <h5 class="h5 text-color font-weight-bold">Cardiology</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialists:</h6>
                             <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Roland & Dr. Jude</p>
@@ -327,11 +412,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
-                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-backpack text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3">
+                                <img src="../img/pedia.png" alt="Pediatrics Icon" class="dept-icon-img">
+                            </div>
                             <h5 class="h5 text-color font-weight-bold">Pediatrics</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
                             <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Matthew Franz</p>
@@ -344,7 +431,9 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
-                            <div class="icn-circle circle-md bg-white mx-auto mb-3"><i class="bi bi-diagram-3 text-green-primary" style="font-size: 1.5rem;"></i></div>
+                            <div class="icn-circle circle-md bg-white mx-auto mb-3">
+                                <img src="../img/neuro.png" alt="Neurology Icon" class="dept-icon-img">
+                            </div>
                             <h5 class="h5 text-color font-weight-bold">Neurology</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
                             <p class="paragraph text-green-primary font-weight-bold mt-1">Dr. Gian Carlos</p>
@@ -573,53 +662,33 @@
     <script src="../js/aos.js"></script>
     <script src="../js/tools.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-        // Intercept form submission to show confirmation question window
-        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            var form = this;
+        AOS.init();
 
-            Swal.fire({
-                title: 'Confirm Booking Request?',
-                text: "Please double check your department and slot timings before submitting.",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#2e7d32', 
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Yes, Submit Request',
-                cancelButtonText: 'Review Details'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        });
-    </script>
+        // JS function to switch form tabs cleanly
+        function switchAuthTab(type) {
+            const loginTab = document.getElementById('tab-login');
+            const signupTab = document.getElementById('tab-signup');
+            const loginForm = document.getElementById('form-login-block');
+            const signupForm = document.getElementById('form-signup-block');
 
-    <?php if (isset($_GET['added'])): ?>
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Appointment Booked!',
-            text: 'Your medical booking request has been submitted successfully.',
-            confirmButtonColor: '#2e7d32'
-        });
-    </script>
-    <?php endif; ?>
+            if (type === 'login') {
+                loginTab.classList.add('active');
+                signupTab.classList.remove('active');
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            } else {
+                signupTab.classList.add('active');
+                loginTab.classList.remove('active');
+                signupForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            }
+        }
 
-    <?php if (isset($_GET['error'])): ?>
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Booking Failed',
-            text: 'An error occurred while connecting with system logs. Please try again.',
-            confirmButtonColor: '#d33'
-        });
+        // Auto-show signup tab if registration fails or succeeds during submission
+        <?php if (isset($_POST['signup'])): ?>
+            switchAuthTab('signup');
+        <?php endif; ?>
     </script>
-    <?php endif; ?>
-</body>
+    </body>
 
 </html>

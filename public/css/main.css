@@ -9767,3 +9767,106 @@ a {
 .custom-faq-accordion .accordion-button::after {
     filter: hue-rotate(115deg) brightness(0.6) contrast(1.1);
 }
+/*Contacts*/
+
+/* 1. Global typography styles */
+.get-in-touch-section, .modern-footer {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.text-muted-light {
+    color: #b2c0d2 !important; /* Soft high-contrast text color against charcoal slate */
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* 2. Sleek Modern Light-Theme Email Subscription Pill Group */
+/* The Pill Wrapper Container */
+.modern-subscribe-group {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+    width: 100% !important;
+    max-width: 550px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+}
+
+/* Fix inner input field component sizes */
+.modern-subscribe-group input.form-control {
+    flex: 1 !important;
+    min-width: 0 !important;
+    height: 48px !important;
+}
+
+/* Standout Button Spacing Optimization */
+.modern-subscribe-btn {
+    background-color: #1e2229 !important;
+    color: #ffffff !important;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    height: 44px !important; /* Forces uniform size inside the pill layout */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 4px !important; /* FIX: Creates the beautiful border edge gap alignment */
+    box-shadow: 0 4px 12px rgba(30, 34, 41, 0.15) !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.25s ease, 
+                box-shadow 0.25s ease !important;
+}
+
+.modern-subscribe-btn:hover {
+    background-color: #2dc071 !important; /* Brand green transformation on hover */
+    box-shadow: 0 6px 15px rgba(45, 192, 113, 0.3) !important;
+    transform: scale(1.02);
+}
+
+/* 3. Footer Components Grid Typography Alignment */
+.footer-heading {
+    color: #ffffff !important;
+    font-size: 1.15rem !important;
+    letter-spacing: 0.5px;
+}
+
+/* Link List Item Hover Micro-Slide Vector Parameters */
+.footer-link-item {
+    color: #b2c0d2 !important; /* Overrides native blue anchor overrides completely */
+    text-decoration: none !important;
+    font-size: 0.92rem;
+    display: block !important;
+    transition: color 0.25s ease, transform 0.25s ease !important;
+}
+
+.footer-link-item:hover {
+    color: #2dc071 !important; /* Smoothly changes to brand green */
+    transform: translateX(4px); /* Moves 4 pixels to the right cleanly */
+}
+
+/* 4. Social Media Icon Circle Containers */
+.social-icon-link {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #b2c0d2 !important;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.social-icon-link:hover {
+    background-color: #2dc071 !important; /* Solid emerald green bubble pop */
+    color: #ffffff !important;
+    border-color: #2dc071 !important;
+    transform: translateY(-4px); /* Vertical spring lift vector */
+}
+
+/* 5. Separator Hairline Metrics */
+.footer-divider {
+    opacity: 1 !important;
+}
+
+.font-size-sm {
+    font-size: 0.85rem !important;
+}

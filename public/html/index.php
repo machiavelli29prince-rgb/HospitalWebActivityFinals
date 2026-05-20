@@ -498,71 +498,95 @@
         </div>
     </div>
 </section>
-<section class="dark-background-color">
-        <div class="container py-5 py-md-7">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-md-5 mb-4 mb-lg-0">
-                    <h2 class="h2 light-text-color">Get In Touch</h2>
-                    <p class="paragraph light-text-color" style="margin-top: 15px">The gradual accumulation of
-                        information about atomic and
-                        small-scale behaviour during the first quarter of the 20th </p>
+<section class="get-in-touch-section py-5 py-md-7" style="background-color: #f0f2f5 !important; color: #1e2229 !important; position: relative; z-index: 2;">
+        <div class="container py-4 text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 mb-4">
+                    <h2 class="h2 fw-bold tracking-tight" style="color: #1e2229 !important; font-family: 'Montserrat', sans-serif; font-size: 2.2rem;">Get In Touch</h2>
+                    <p class="paragraph mt-3 px-md-5" style="color: #5a6578 !important; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; line-height: 1.6;">
+                        Follow our medical portal to receive official clinical updates, health advisory protocols, and research breakthroughs from our medical board.
+                    </p>
                 </div>
-                <div class="col-lg-5 col-md-6">
-                    <div class="form-group">
-                        <div class="input-group input-style-2 mb-2 mr-sm-2"><input class="form-control" type="text"
-                                placeholder="Your Email"></input>
-                            <div class="input-group-append mt-2 mt-sm-0"><button
-                                    class="btn bg-green-accent h-100"><span>Follow</span></button></div>  
-</section>        
-    <footer class="position-relative">
-        <div>
-            <div class="container py-5 py-md-7">
-                <div class="row justify-content-center align-items-stretch">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <h3 class="h3 text-color">Get In Touch</h3>
-                        <p class="paragraph second-text-color mt-4">the quick fox jumps over the
-                            lazy dog</p>
-                        <div class="card-content py-2 mt-4"><a class="facebook" href="#"><i
-                                    class="bi bi-facebook icn-sm text-green-primary"></i></a><a class="instagram"
-                                href="#"><i class="bi bi-instagram icn-sm text-green-primary"
-                                    style="margin-left: 20px"></i></a><a class="twitter" href="#"><i
-                                    class="bi bi-twitter icn-sm text-green-primary" style="margin-left: 20px"></i></a>
+                
+                <div class="col-lg-6 col-md-8 d-flex justify-content-center">
+                    <form action="" method="POST" class="form-group mb-0 w-100 d-flex justify-content-center">
+                        <div class="modern-subscribe-group d-flex p-2 rounded-pill bg-white align-items-center">
+                            <input class="form-control ps-4 pe-3 border-0 bg-transparent" type="email" placeholder="Enter business email address" style="font-family: 'Montserrat', sans-serif; color: #1e2229 !important;" required></input>
+                            <button class="btn modern-subscribe-btn rounded-pill px-5 fw-bold" type="submit" style="font-family: 'Montserrat', sans-serif;">
+                                <span>Follow</span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <h3 class="h3 text-color">Company info</h3>
-                        <div class="links" style="margin-top: 20px"><a class="link second-text-color d-block"
-                                href="#">About Us</a><a class="link second-text-color d-block" href="#"
-                                style="margin-top: 10px">Carrier</a><a class="link second-text-color d-block" href="#"
-                                style="margin-top: 10px">We are hiring</a><a class="link second-text-color d-block"
-                                href="#" style="margin-top: 10px">Blog</a></div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <h3 class="h3 text-color">Features</h3>
-                        <div class="links" style="margin-top: 20px"><a class="link second-text-color d-block"
-                                href="#">Business Marketing</a><a class="link second-text-color d-block" href="#"
-                                style="margin-top: 10px">User Analytic</a><a class="link second-text-color d-block"
-                                href="#" style="margin-top: 10px">Live Chat</a><a class="link second-text-color d-block"
-                                href="#" style="margin-top: 10px">Unlimited Support</a></div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="h3 text-color">Resources</h3>
-                        <div class="links" style="margin-top: 20px"><a class="link second-text-color d-block"
-                                href="#">IOS & Android</a><a class="link second-text-color d-block" href="#"
-                                style="margin-top: 10px">Watch a Demo</a><a class="link second-text-color d-block"
-                                href="#" style="margin-top: 10px">Customers</a><a class="link second-text-color d-block"
-                                href="#" style="margin-top: 10px">API</a></div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="light-gray-1">
-            <div class="container py-4">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-md-6">
-                        <h6 class="h6 second-text-color text-md-center ">Made With Love All Right Reserved
-                        </h6>
+    </section>
+
+    <footer class="modern-footer position-relative pb-5 text-white" style="background-color: #1e2229 !important; position: relative; z-index: 2;">
+        <div class="container">
+            <div class="row justify-content-between pt-5">
+                <div class="col-xl-3 col-md-6 mb-4 mb-xl-0">
+                    <h3 class="h3 footer-heading fw-bold mb-4" style="color: #ffffff !important; font-family: 'Montserrat', sans-serif;">Rodencia Hospital</h3>
+                    <p class="paragraph text-muted-light mb-4" style="font-family: 'Montserrat', sans-serif;">
+                        Advancing patient-centered healthcare delivery infrastructures through integrated laboratory networks, clinical excellence, and 24/7 critical trauma response systems.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a class="social-icon-link d-flex align-items-center justify-content-center rounded-circle" href="#" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a class="social-icon-link d-flex align-items-center justify-content-center rounded-circle" href="#" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a class="social-icon-link d-flex align-items-center justify-content-center rounded-circle" href="#" aria-label="Twitter">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a class="social-icon-link d-flex align-items-center justify-content-center rounded-circle" href="#" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a class="social-icon-link d-flex align-items-center justify-content-center rounded-circle" href="#" aria-label="YouTube">
+                            <i class="bi bi-youtube"></i>
+                        </a>
                     </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4 mb-xl-0 ps-xl-4">
+                    <h3 class="h3 footer-heading fw-bold mb-4" style="color: #ffffff !important; font-family: 'Montserrat', sans-serif;">Institutional Profile</h3>
+                    <div class="footer-links-list d-flex flex-column">
+                        <a class="footer-link-item mb-2" href="#">About Our Medical System</a>
+                        <a class="footer-link-item mb-2" href="#">Clinical Operations Team</a>
+                        <a class="footer-link-item mb-2" href="#">Academic Medical Research</a>
+                        <a class="footer-link-item" href="#">Hospital Governance Board</a>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4 mb-md-0">
+                    <h3 class="h3 footer-heading fw-bold mb-4" style="color: #ffffff !important; font-family: 'Montserrat', sans-serif;">Core Care Portfolios</h3>
+                    <div class="footer-links-list d-flex flex-column">
+                        <a class="footer-link-item mb-2" href="#">Telehealth & Remote Triage</a>
+                        <a class="footer-link-item mb-2" href="#">Inpatient Logistics Portal</a>
+                        <a class="footer-link-item mb-2" href="#">Emergency Resource Dispatch</a>
+                        <a class="footer-link-item" href="#">Diagnostic Pricing Framework</a>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <h3 class="h3 footer-heading fw-bold mb-4" style="color: #ffffff !important; font-family: 'Montserrat', sans-serif;">Patient Resources</h3>
+                    <div class="footer-links-list d-flex flex-column">
+                        <a class="footer-link-item mb-2" href="#">Mobile Electronic Health Record App</a>
+                        <a class="footer-link-item mb-2" href="#">Physician Consultation Scheduler</a>
+                        <a class="footer-link-item mb-2" href="#">Privacy & Statutory Legal Compliance</a>
+                        <a class="footer-link-item" href="#">Developer API & Integration Documentation</a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="footer-divider my-5" style="border-top: 1px solid rgba(255, 255, 255, 0.08) !important;">
+            
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center">
+                    <p class="mb-0 text-muted-light font-size-sm" style="font-family: 'Montserrat', sans-serif;">
+                        &copy; 2026 Rodencia Hospital Systems. All Rights Reserved. Engineered with enterprise data protection protocols.
+                    </p>
                 </div>
             </div>
         </div>

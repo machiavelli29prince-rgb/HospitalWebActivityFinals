@@ -2,6 +2,7 @@
 session_start();
 require_once("appointLib.php");
 
+// Auth Guard: Universal authentication checkpoint rule
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth.php");
     exit();
@@ -9,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $appointment = new Appointment();
 
+// Mutation Request: Secure form processing block
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $appointment->setId($_POST['id']);
     $currentRecord = $appointment->getAppointment();
@@ -18,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         exit();
     }
 
-    // Ownership check: Prevent patients from updating appointments belonging to others
+    // Security Ownership Check: Confirms that non-doctor profiles match the unique data owner record
     if ($_SESSION['user_role'] === 'patient' && $currentRecord->user_id != $_SESSION['user_id']) {
         header("Location: users.php?error=unauthorized");
         exit();
@@ -41,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     }
 }
 
-// Standalone GET loader verification check
+// Fetch Request: Validation intercept layer for loading a single item via GET requests
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $appointment->setId($_GET['id']);
     $currentPatient = $appointment->getAppointment();

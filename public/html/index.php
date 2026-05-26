@@ -1,12 +1,11 @@
 <?php
-// 1. TEMPORARY TROUBLESHOOTING: Force errors to display if something breaks
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
 
-// 2. Load your groupmate's library file safely
+// Dependancy Check: Halts processing sequence immediately if core object structures are missing
 if (!file_exists('appointLib.php')) {
     die("<div style='padding:20px; background:#ffebee; color:#c62828; font-family:sans-serif;'>
             <strong>Critical System Error:</strong> <code>appointLib.php</code> could not be found in this directory. 
@@ -20,9 +19,10 @@ $appLib = new Appointment();
 $error = '';
 $success = '';
 
-// 3. Process Account Registration and Sign-In Submissions
+// Form Handler Routing: Inspects post verbs to process registration queries vs validation login streams
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Process Account Registration Action
+    
+    // Sub-Module: Handles execution patterns for new registration entries
     if (isset($_POST['signup'])) {
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role = $_POST['role'];
 
         if (!empty($name) && !empty($email) && !empty($password) && !empty($role)) {
+            // Collision Check: Validates system unique index keys before inserting data records
             if ($appLib->getUserByEmail($email)) {
                 $error = "This email is already registered in our system.";
             } else {
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Process System Authentication Action
+    // Sub-Module: Resolves incoming credentials against user authentication tracking datasets
     if (isset($_POST['login'])) {
         $email = trim($_POST['email']);
         $password = $_POST['password'];
@@ -52,12 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($email) && !empty($password)) {
             $user = $appLib->getUserByEmail($email);
             
+            // Password Check: Runs raw inputs against stored secure hash profiles
             if ($user && password_verify($password, $user->password)) {
+                // Session Setter: Initializes environment metadata scopes upon matching parameters
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['user_name'] = $user->name;
                 $_SESSION['user_email'] = $user->email;
                 $_SESSION['user_role'] = $user->role;
 
+                // Authorization Router: Directs traffic paths based on roles mapped to accounts
                 if ($user->role === 'doctor') {
                     header("Location: doctor.php");
                 } else {
@@ -90,56 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        /* Smooth scrolling behavior for navigation anchors */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Main green brand colors */
-        .bg-green-primary { background-color: #2e7d32 !important; color: white !important; } /* Deep medical green */
+        html { scroll-behavior: smooth; }
+        .bg-green-primary { background-color: #2e7d32 !important; color: white !important; } 
         .bg-green-primary:hover { background-color: #1b5e20 !important; }
-        
-        .bg-green-accent { background-color: #4caf50 !important; color: white !important; } /* Mid-tone green */
+        .bg-green-accent { background-color: #4caf50 !important; color: white !important; } 
         .bg-green-accent:hover { background-color: #388e3c !important; }
-
-        .bg-green-light { background-color: #e8f5e9 !important; } /* Soft light green tint background */
-        .text-green-primary { color: #2e7d32 !important; } /* Deep green for text highlights */
-        
-        /* Team Profile Image Handler */
-        .team-img-container {
-            width: 100%;
-            height: 250px;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .team-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Hover effect indicating the card can be interacted with */
-        .clickable-team-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .clickable-team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
-        }
-
-        /* Fixes the Bootstrap modal backdrop overlay bug */
-        .modal {
-            z-index: 1060 !important;
-        }
-        .modal-backdrop {
-            z-index: 1050 !important;
-        }
-
-        /* Form Switch Tabs */
+        .bg-green-light { background-color: #e8f5e9 !important; } 
+        .text-green-primary { color: #2e7d32 !important; } 
+        .team-img-container { width: 100%; height: 250px; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .team-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .clickable-team-card { cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .clickable-team-card:hover { transform: translateY(-5px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; }
+        .modal { z-index: 1060 !important; }
+        .modal-backdrop { z-index: 1050 !important; }
         .auth-tab { cursor: pointer; padding: 12px; text-align: center; font-weight: bold; border-bottom: 2px solid transparent; transition: 0.2s ease; }
         .auth-tab.active { border-bottom: 2px solid #2e7d32; color: #2e7d32; background-color: #f8f9fa; }
     </style>
@@ -688,7 +655,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         AOS.init();
 
-        // JS function to switch form tabs cleanly
+        // UI Scripting Engine: Manipulates the DOM CSS style rules to slide sub-forms back and forth
         function switchAuthTab(type) {
             const loginTab = document.getElementById('tab-login');
             const signupTab = document.getElementById('tab-signup');
@@ -708,7 +675,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Auto-show signup tab if registration fails or succeeds during submission
+        // View Validation Handler: Runs a PHP intercept query to force-keep the registration container open if submission updates fail
         <?php if (isset($_POST['signup'])): ?>
             switchAuthTab('signup');
         <?php endif; ?>

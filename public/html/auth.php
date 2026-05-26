@@ -6,6 +6,7 @@ $appLib = new Appointment();
 $error = '';
 $success = '';
 
+// Auth Controller: Handles account sign-up form processing
 if (isset($_POST['signup'])) {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
@@ -27,6 +28,7 @@ if (isset($_POST['signup'])) {
     }
 }
 
+// Auth Controller: Verifies crypt hashes and initializes specific dashboard sessions
 if (isset($_POST['login'])) {
     $email = trim($_POST['email']);
     $password = $_POST['password'];

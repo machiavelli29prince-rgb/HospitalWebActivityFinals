@@ -2,16 +2,16 @@
 session_start();
 require_once 'appointLib.php';
 
-// Verification check: Ensure only logged-in patients can trigger data insertion loops
+// Auth Guard: Enforces strict session verification for patients adding records
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
     header("Location: auth.php");
     exit();
 }
 
+// Creation Controller: Binds session-validated user parameters directly to new requests
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $appointment = new Appointment();
 
-    // Map system tracking keys directly from explicit active user session data parameters
     $appointment->setUserId($_SESSION['user_id']);
     $appointment->setName($_POST['name']);
     $appointment->setEmail($_POST['email']);

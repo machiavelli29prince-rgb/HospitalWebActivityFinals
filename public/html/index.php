@@ -221,6 +221,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </header>
+    <section id="about" class="py-7 bg-light">
+    <div class="container">
+        <div class="row g-5">
+            
+            <div class="col-lg-6">
+                <h2 class="fw-bold text-success mb-3">About Our Medical System</h2>
+                <p class="lead text-dark">
+                    Rodencia Hospital coordinates digital healthcare logistics natively, ensuring persistent availability for patient scheduling interfaces and clinic administration data pools.
+                </p>
+                <p class="text-muted small">
+                    Our platform relies on enterprise database layer security to keep clinical logs protected while providing transparent access portals for our community nodes.
+                </p>
+                
+                <div class="mt-4 border-start border-success border-3 ps-3">
+                    <h6 class="fw-bold text-dark mb-1">Hospital Governance Board</h6>
+                    <p class="text-muted small mb-0">Overseeing statutory compliance, infrastructure deployment benchmarks, and ethical healthcare operations.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4 h-100 bg-white">
+                    <h5 class="fw-bold text-dark mb-3">Core Care Portfolios</h5>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <div>
+                                <strong class="text-dark d-block">Telehealth & Remote Triage</strong>
+                                <span class="text-muted small">Real-time off-site triage routing pipelines to secure virtual consultations.</span>
+                            </div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <div>
+                                <strong class="text-dark d-block">Inpatient Logistics Portal</strong>
+                                <span class="text-muted small">Centralized department coordination nodes keeping clinic queues perfectly synchronized.</span>
+                            </div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <div>
+                                <strong class="text-dark d-block">Emergency Resource Dispatch</strong>
+                                <span class="text-muted small">Instantaneous scheduling mobilization protocols for urgent clinical care interventions.</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <hr class="my-2 opacity-25">
+                    
+                    <h5 class="fw-bold text-dark mt-2 mb-2">Academic Medical Research</h5>
+                    <p class="text-muted small mb-0">Our clinical operations team continually tracks framework metrics to pioneer breakthrough care optimization methodologies.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     <section id="team">
         <div class="container py-7 py-lg-9">
@@ -615,13 +671,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div class="col-xl-3 col-md-6 mb-4 mb-xl-0 ps-xl-4">
-                    <h3 class="h3 footer-heading fw-bold mb-4" style="color: #ffffff !important; font-family: 'Montserrat', sans-serif;">Institutional Profile</h3>
-                    <div class="footer-links-list d-flex flex-column">
-                        <a class="footer-link-item mb-2" href="#">About Our Medical System</a>
-                        <a class="footer-link-item mb-2" href="#">Clinical Operations Team</a>
-                        <a class="footer-link-item mb-2" href="#">Academic Medical Research</a>
-                        <a class="footer-link-item" href="#">Hospital Governance Board</a>
-                    </div>
+                    <h3 class="h3 footer-heading fw-bold mb-4" style="font-family: 'Montserrat', sans-serif;">Institutional Profile</h3>
+<div class="footer-links-list d-flex flex-column">
+    <div class="footer-links-list d-flex flex-column">
+    <a class="footer-link-item mb-2" href="index.php#about">About Our Medical System</a>
+    <a class="footer-link-item mb-2" href="index.php#team">Clinical Operations Team</a>
+    <a class="footer-link-item mb-2" href="index.php#auth-section">Physician Consultation Scheduler</a>
+</div>
+    <a class="footer-link-item" href="#">Hospital Governance Board</a>
+</div>
                 </div>
                 
                 <div class="col-xl-3 col-md-6 mb-4 mb-md-0">
@@ -635,13 +693,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div class="col-xl-3 col-md-6">
-                    <h3 class="h3 footer-heading fw-bold mb-4" style="color: #ffffff !important; font-family: 'Montserrat', sans-serif;">Patient Resources</h3>
-                    <div class="footer-links-list d-flex flex-column">
-                        <a class="footer-link-item mb-2" href="#">Mobile Electronic Health Record App</a>
-                        <a class="footer-link-item mb-2" href="#">Physician Consultation Scheduler</a>
-                        <a class="footer-link-item mb-2" href="#">Privacy & Statutory Legal Compliance</a>
-                        <a class="footer-link-item" href="#">Developer API & Integration Documentation</a>
-                    </div>
+                    <h3 class="h3 footer-heading fw-bold mb-4" style="font-family: 'Montserrat', sans-serif;">Patient Resources</h3>
+<div class="footer-links-list d-flex flex-column">
+    <a class="footer-link-item mb-2" href="#about">Mobile Electronic Health Record App</a>
+<a class="footer-link-item mb-2" href="#auth-section">Physician Consultation Scheduler</a>
+    <a class="footer-link-item mb-2" href="#faq">Privacy & Statutory Legal Compliance</a>
+    <a class="footer-link-item" href="index.php#auth-section">Developer API & Integration Documentation</a>
+</div>
                 </div>
             </div>
             

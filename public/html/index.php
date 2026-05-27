@@ -1,5 +1,5 @@
 <?php
-// 1. Enable errors during development for debugging
+//enable errors during development for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);

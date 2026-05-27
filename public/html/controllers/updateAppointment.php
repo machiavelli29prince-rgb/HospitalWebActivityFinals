@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
-// Auth Guard: Universal authentication checkpoint rule
+// Only authenticated users can update appointment records.
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views/auth.php');
     exit();
@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $appointment = new Appointment();
 
+// Handle form submission for appointment updates.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $appointment->id = (int) $_POST['id'];
     $currentRecord = $appointment->fetchById($appointment->id);
@@ -48,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     echo 'Error: Mutation engine validation failure.';
 }
 
+// Load the requested appointment when the page is accessed with an ID.
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $appointment->id = (int) $_GET['id'];
     $currentPatient = $appointment->fetchById($appointment->id);
-    
     if (!$currentPatient) {
         header('Location: ../views/users.php');
         exit();

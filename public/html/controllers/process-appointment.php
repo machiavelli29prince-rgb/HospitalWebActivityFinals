@@ -1,12 +1,13 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
-// Auth Guard: Enforces strict session verification for patients adding records
+// Ensure only a logged-in patient can create a new appointment.
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
     header('Location: ../views/auth.php');
     exit();
 }
 
+// Process form submission for appointment creation.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $appointment = new Appointment();
     $appointment->user_id = (int) $_SESSION['user_id'];

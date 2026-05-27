@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../utils/db.php';
 require_once __DIR__ . '/../utils/Mailer.php';
 
+// User model encapsulates user CRUD operations, authentication, and password updates.
 class User
 {
     private $db;
@@ -17,6 +18,7 @@ class User
         $this->db = new Database();
     }
 
+    // Check if an email is already registered.
     public static function emailExists(string $email): bool
     {
         $db = new Database();
@@ -25,6 +27,7 @@ class User
         return (bool) $db->single();
     }
 
+    // Load user data by email address.
     public function loadByEmail(string $email): bool
     {
         $this->db->query('SELECT * FROM users WHERE email = :email');
@@ -43,6 +46,7 @@ class User
         return true;
     }
 
+    // Load user data by database ID.
     public function loadById(int $id): bool
     {
         $this->db->query('SELECT * FROM users WHERE id = :id');
@@ -61,11 +65,13 @@ class User
         return true;
     }
 
+    // Verify a plaintext password against the stored hash.
     public function verifyPassword(string $password): bool
     {
         return password_verify($password, $this->passwordHash);
     }
 
+    // Register a new user account.
     public function register(string $name, string $email, string $password, string $role): bool
     {
         if (self::emailExists($email)) {
@@ -82,6 +88,7 @@ class User
         return $this->db->execute();
     }
 
+    // Update the stored password for the current user.
     public function updatePassword(string $password): bool
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -93,6 +100,7 @@ class User
     }
 }
 
+// Appointment model handles appointment queries and persistence.
 class Appointment
 {
     private $db;
@@ -108,12 +116,14 @@ class Appointment
         $this->db = new Database();
     }
 
+    // Retrieve all appointments.
     public function fetchAll(): array
     {
         $this->db->query('SELECT * FROM appointments ORDER BY id DESC');
         return $this->db->set();
     }
 
+    // Retrieve a single appointment by ID.
     public function fetchById(int $id)
     {
         $this->db->query('SELECT * FROM appointments WHERE id = :id');
@@ -121,6 +131,7 @@ class Appointment
         return $this->db->single();
     }
 
+    // Retrieve appointments for a specific user.
     public function fetchByUser(int $userId): array
     {
         $this->db->query('SELECT * FROM appointments WHERE user_id = :user_id ORDER BY id DESC');
@@ -128,6 +139,7 @@ class Appointment
         return $this->db->set();
     }
 
+    // Retrieve appointments by department.
     public function fetchByDepartment(string $department): array
     {
         $this->db->query('SELECT * FROM appointments WHERE department = :department ORDER BY id DESC');
@@ -135,6 +147,7 @@ class Appointment
         return $this->db->set();
     }
 
+    // Create a new appointment record.
     public function create(): bool
     {
         $this->db->query('INSERT INTO appointments (user_id, name, email, department, time) VALUES (:user_id, :name, :email, :department, :time)');
@@ -147,6 +160,7 @@ class Appointment
         return $this->db->execute();
     }
 
+    // Update an existing appointment record.
     public function update(): bool
     {
         $this->db->query('UPDATE appointments SET name = :name, email = :email, department = :department, time = :time WHERE id = :id');
@@ -159,6 +173,7 @@ class Appointment
         return $this->db->execute();
     }
 
+    // Delete an appointment record.
     public function delete(): bool
     {
         $this->db->query('DELETE FROM appointments WHERE id = :id');
@@ -167,6 +182,7 @@ class Appointment
     }
 }
 
+// Password reset model manages reset tokens and expiration.
 class PasswordReset
 {
     private $db;
@@ -180,6 +196,7 @@ class PasswordReset
         $this->db = new Database();
     }
 
+    // Ensure the password_resets table exists before using it.
     private function ensureTableExists(): void
     {
         $this->db->query(
@@ -194,6 +211,7 @@ class PasswordReset
         $this->db->execute();
     }
 
+    // Store a new reset token for the user.
     public function create(int $userId, string $token, string $expiresAt): bool
     {
         $this->ensureTableExists();
@@ -205,6 +223,7 @@ class PasswordReset
         return $this->db->execute();
     }
 
+    // Load a reset request by token.
     public function loadByToken(string $token): bool
     {
         $this->ensureTableExists();
@@ -223,6 +242,7 @@ class PasswordReset
         return true;
     }
 
+    // Remove any existing reset tokens for a user.
     public function deleteByUserId(int $userId): bool
     {
         $this->ensureTableExists();
@@ -231,6 +251,7 @@ class PasswordReset
         return $this->db->execute();
     }
 
+    // Remove a reset token after it has been used.
     public function deleteByToken(string $token): bool
     {
         $this->ensureTableExists();
@@ -240,6 +261,7 @@ class PasswordReset
     }
 }
 
+// Authentication controller for registration, login, and password reset workflows.
 class AuthController
 {
     private $mailer;
@@ -255,6 +277,7 @@ class AuthController
         return $this->lastError;
     }
 
+    // Enforce a strong password policy during signup and reset.
     private function validatePassword(string $password): bool
     {
         $errors = [];
@@ -289,6 +312,7 @@ class AuthController
         return true;
     }
 
+    // Build the app base URL for reset links.
     private function buildBaseUrl(): string
     {
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
@@ -302,6 +326,7 @@ class AuthController
         return rtrim($scheme . '://' . $host . $scriptDir, '/');
     }
 
+    // Register a new user and send a confirmation email.
     public function register(string $name, string $email, string $password, string $role): bool
     {
         if (empty($name) || empty($email) || empty($password) || empty($role)) {
@@ -340,6 +365,7 @@ class AuthController
         return $registerSuccess;
     }
 
+    // Authenticate a user by email and password.
     public function login(string $email, string $password)
     {
         $user = new User();
@@ -356,6 +382,7 @@ class AuthController
         return $user;
     }
 
+    // Request a password reset, create a token, and email the user.
     public function requestPasswordReset(string $email): bool
     {
         $user = new User();
@@ -383,6 +410,7 @@ class AuthController
         return true;
     }
 
+    // Process a password reset using a valid token.
     public function resetPassword(string $token, string $password): bool
     {
         if (!$this->validatePassword($password)) {

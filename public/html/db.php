@@ -39,11 +39,12 @@ class Database{
         $this->stmt=$this->connection->prepare($query);
     }
 
+    // Execute prepared statement
     function execute(){
         return $this->stmt->execute();
     }
 
-    // Query Method: Returns all matching entities map-transformed into clean objects
+    // Get results set as an array of objects
     function set(){
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
@@ -55,7 +56,14 @@ class Database{
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    // Parameter Sanitizer: Explicit type evaluation mapping to protect from SQL injection
+    function rowCount(){
+        return $this->stmt->rowCount();
+    }
+
+    function lastInsertId(){
+        return $this->connection->lastInsertId();
+    }
+
     function bind($param, $value, $type=null){
         if(is_null($type)){
             switch(true){

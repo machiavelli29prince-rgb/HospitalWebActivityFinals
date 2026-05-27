@@ -1,25 +1,23 @@
 <?php
-session_start();
+require_once 'bootstrap.php';
 
 // Access Guard: Enforces strict session verification for medical staff access states
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
-    header("Location: index.php#auth-section");
+    header('Location: index.php#auth-section');
     exit();
 }
 
-require_once 'appointLib.php';
 $appointmentLib = new Appointment();
 
 // Request Routing Pre-Processor: Sets and validates the current active clinic department parameter
 $departments = ["General Medicine", "Cardiology", "Pediatrics", "Neurology"];
 $current_dept = isset($_GET['dept']) ? $_GET['dept'] : "General Medicine";
 
-if (!in_array($current_dept, $departments)) {
+if (!in_array($current_dept, $departments, true)) {
     $current_dept = "General Medicine";
 }
 
-// Data Request: Pulls the collection of appointments linked to the active department scope
-$patient_list = $appointmentLib->getAppointmentsByDepartment($current_dept);
+$patient_list = $appointmentLib->fetchByDepartment($current_dept);
 ?>
 <!DOCTYPE html>
 <html lang="en">

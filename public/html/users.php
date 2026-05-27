@@ -1,10 +1,9 @@
 <?php
-session_start();
-require_once("appointLib.php");
+require_once 'bootstrap.php';
 
 // Auth Guard: Redirects guest users away from private system space
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php#auth-section");
+    header('Location: index.php#auth-section');
     exit();
 }
 
@@ -15,16 +14,16 @@ if ($_SESSION['user_role'] === 'doctor') {
 }
 
 $post = new Appointment();
-$posts = $post->getAppointmentsByPatient($_SESSION['user_id']);
+$posts = $post->fetchByUser((int) $_SESSION['user_id']);
 $currentAppointment = null;
 
 // Routing Pre-Processor: Checks entity parameters before populating modification interfaces
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $post->setId($_GET['id']);
-    $currentAppointment = $post->getAppointment();
+    $post->id = (int) $_GET['id'];
+    $currentAppointment = $post->fetchById($post->id);
     
     if ($currentAppointment && $currentAppointment->user_id != $_SESSION['user_id']) {
-        header("Location: users.php?error=unauthorized");
+        header('Location: users.php?error=unauthorized');
         exit();
     }
 }

@@ -689,6 +689,113 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             switchAuthTab('signup');
         <?php endif; ?>
     </script>
+
+    <audio id="lizardAudio" src="../img/team/lizard-button.mp3" preload="auto"></audio>
+
+    <div id="lizardOverlay" style="
+        display: none; 
+        position: fixed; 
+        top: 0; left: 0; 
+        width: 100%; height: 100%; 
+        background: rgba(14, 22, 15, 0.95); 
+        border: 10px solid #2ecc71;
+        z-index: 99999; 
+        justify-content: center; 
+        align-items: center; 
+        color: #2ecc71; 
+        font-family: 'Courier New', Courier, monospace; 
+        text-align: center;
+        flex-direction: column;
+    ">
+        <h1 style="font-size: 3.5rem; font-weight: bold; text-shadow: 0 0 10px #2ecc71; margin-bottom: 10px;">🦎 LIZARD DETECTED 🦎</h1>
+        <p style="font-size: 1.2rem; color: #a3e4d7; max-width: 600px; line-height: 1.5; margin-bottom: 30px;">
+            Warning: Reptilian presence identified within the Rodencia medical ward premises. Decontamination protocols initialized.
+        </p>
+        <button onclick="dismissLizard()" class="btn btn-outline-success px-4 py-2 rounded-pill fw-bold" style="letter-spacing: 2px;">
+            CLOSE CHAMBER
+        </button>
+    </div>
+
+    <script>
+        let sequence = ['l', 'i', 'z', 'a', 'r', 'd'];
+        let indexPointer = 0;
+
+        // Stateholders for automatic dismissal flow
+        let lizardAutoDismissTimeout = null;
+        let lizardEndedHandler = null;
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key.toLowerCase() === sequence[indexPointer]) {
+                indexPointer++;
+                if (indexPointer === sequence.length) {
+                    triggerLizardBreach(); // Trigger the audio + overlay sequence
+                    indexPointer = 0;
+                }
+            } else {
+                indexPointer = 0; // Reset tracker if a wrong key sequence is input
+            }
+        });
+
+        function triggerLizardBreach() {
+            const sound = document.getElementById('lizardAudio');
+
+            // Clean any previous listeners/timeouts
+            if (lizardEndedHandler) {
+                sound.removeEventListener('ended', lizardEndedHandler);
+                lizardEndedHandler = null;
+            }
+            if (lizardAutoDismissTimeout) {
+                clearTimeout(lizardAutoDismissTimeout);
+                lizardAutoDismissTimeout = null;
+            }
+
+            // Handler that will dismiss when audio finishes
+            lizardEndedHandler = function() {
+                try { dismissLizard(); } catch (e) { /* ignore */ }
+                // cleanup
+                sound.removeEventListener('ended', lizardEndedHandler);
+                lizardEndedHandler = null;
+                if (lizardAutoDismissTimeout) { clearTimeout(lizardAutoDismissTimeout); lizardAutoDismissTimeout = null; }
+            };
+
+            sound.addEventListener('ended', lizardEndedHandler);
+
+            // Rewind and play the audio; log interaction errors if any
+            sound.currentTime = 0; // Fast rewind for instant replay
+            const playPromise = sound.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => console.log('Interaction barrier encountered:', err));
+            }
+
+            // Display the hidden warning window matrix
+            document.getElementById('lizardOverlay').style.display = 'flex';
+
+            // Fallback: in case 'ended' never fires (browser quirk or no audio), auto-dismiss after 3s
+            lizardAutoDismissTimeout = setTimeout(() => {
+                try { dismissLizard(); } catch (e) { /* ignore */ }
+                if (lizardEndedHandler) { sound.removeEventListener('ended', lizardEndedHandler); lizardEndedHandler = null; }
+                lizardAutoDismissTimeout = null;
+            }, 3000);
+        }
+
+        function dismissLizard() {
+            const overlay = document.getElementById('lizardOverlay');
+            const sound = document.getElementById('lizardAudio');
+            if (overlay) overlay.style.display = 'none';
+
+            if (sound) {
+                sound.pause();
+                try { sound.currentTime = 0; } catch (e) { /* some browsers may restrict */ }
+                if (lizardEndedHandler) { sound.removeEventListener('ended', lizardEndedHandler); lizardEndedHandler = null; }
+            }
+
+            if (lizardAutoDismissTimeout) {
+                clearTimeout(lizardAutoDismissTimeout);
+                lizardAutoDismissTimeout = null;
+            }
+        }
+    </script>
+
     </body>
 
 </html>

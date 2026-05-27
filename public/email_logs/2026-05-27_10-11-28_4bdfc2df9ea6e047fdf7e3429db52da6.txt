@@ -1,0 +1,7 @@
+To: machiavelli29prince@gmail.com
+Subject: Rodencia Password Reset Request
+Date: 2026-05-27 10:11:28
+From: Rodencia Hospital
+------------------------------------------------------------
+
+<p>Hi Roland Machiavelli Loresca Roa,</p><p>We received a request to reset your password. Click the link below to choose a new password. This link will expire in one hour.</p><p><a href="http://localhost/HospitalWebFinals/public/html/views/reset-password.php?token=6765a1dac514900df78c819ea6c289ee">Reset your password</a></p><p>If you did not request this change, please ignore this email.</p><p>Best regards,<br>Rodencia Hospital Team</p>

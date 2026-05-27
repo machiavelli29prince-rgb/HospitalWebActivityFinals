@@ -1,28 +1,16 @@
 <?php
-// 1. TEMPORARY TROUBLESHOOTING: Force errors to display if something breaks
+// 1. Enable errors during development for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
-
-// 2. Load your groupmate's library file safely
-if (!file_exists('appointLib.php')) {
-    die("<div style='padding:20px; background:#ffebee; color:#c62828; font-family:sans-serif;'>
-            <strong>Critical System Error:</strong> <code>appointLib.php</code> could not be found in this directory. 
-            Please make sure the library file is in the exact same folder as this index.php file.
-         </div>");
-}
-
-require_once 'appointLib.php';
-$appLib = new Appointment();
+require_once 'bootstrap.php';
 
 $error = '';
 $success = '';
+$auth = new AuthController();
 
-// 3. Process Account Registration and Sign-In Submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Process Account Registration Action
     if (isset($_POST['signup'])) {
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
@@ -30,45 +18,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role = $_POST['role'];
 
         if (!empty($name) && !empty($email) && !empty($password) && !empty($role)) {
-            if ($appLib->getUserByEmail($email)) {
-                $error = "This email is already registered in our system.";
+            if (User::emailExists($email)) {
+                $error = 'This email is already registered in our system.';
             } else {
-                if ($appLib->registerUser($name, $email, $password, $role)) {
-                    $success = "Account created successfully! You can now log in.";
+                if ($auth->register($name, $email, $password, $role)) {
+                    $success = 'Account created successfully! You can now log in.';
                 } else {
-                    $error = "An error occurred while creating your account.";
+                    $error = 'An error occurred while creating your account.';
                 }
             }
         } else {
-            $error = "Please fill out all mandatory registration fields.";
+            $error = 'Please fill out all mandatory registration fields.';
         }
     }
 
-    // Process System Authentication Action
     if (isset($_POST['login'])) {
         $email = trim($_POST['email']);
         $password = $_POST['password'];
 
         if (!empty($email) && !empty($password)) {
-            $user = $appLib->getUserByEmail($email);
-            
-            if ($user && password_verify($password, $user->password)) {
+            $user = $auth->login($email, $password);
+
+            if ($user) {
+                session_regenerate_id(true);
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['user_name'] = $user->name;
                 $_SESSION['user_email'] = $user->email;
                 $_SESSION['user_role'] = $user->role;
 
                 if ($user->role === 'doctor') {
-                    header("Location: doctor.php");
+                    header('Location: doctor.php');
                 } else {
-                    header("Location: users.php");
+                    header('Location: users.php');
                 }
                 exit();
-            } else {
-                $error = "Invalid email or password combination.";
             }
+
+            $error = 'Invalid email or password combination.';
         } else {
-            $error = "Please fill out all credential spaces.";
+            $error = 'Please fill out all credential spaces.';
+        }
+    }
+
+    if (isset($_POST['subscribe'])) {
+        $subscribeEmail = trim($_POST['subscribe_email']);
+
+        if (!empty($subscribeEmail) && filter_var($subscribeEmail, FILTER_VALIDATE_EMAIL)) {
+            $mailer = new MailerHelper();
+            $subscriberSubject = 'Rodencia Health Advisory Subscription';
+            $subscriberBody = "<p>Thank you for following Rodencia Hospital.</p>" .
+                "<p>You will receive official clinical updates, health advisories, and research news from our medical board.</p>" .
+                "<p>If you want to manage your subscription, reply to this email or contact our support team.</p>";
+
+            // Attempt to send email - for local development, this may not deliver but won't throw errors
+            $mailer->sendEmail($subscribeEmail, $subscriberSubject, $subscriberBody);
+            
+            // Always show success - emails will be logged even if local mail() doesn't deliver
+            $success = 'Thank you for subscribing! Check your email for confirmation details.';
+        } else {
+            $error = 'Please provide a valid business email address to subscribe.';
         }
     }
 }
@@ -600,8 +608,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="col-lg-6 col-md-8 d-flex justify-content-center">
                     <form action="" method="POST" class="form-group mb-0 w-100 d-flex justify-content-center">
                         <div class="modern-subscribe-group d-flex p-2 rounded-pill bg-white align-items-center">
-                            <input class="form-control ps-4 pe-3 border-0 bg-transparent" type="email" placeholder="Enter business email address" style="font-family: 'Montserrat', sans-serif; color: #1e2229 !important;" required></input>
-                            <button class="btn modern-subscribe-btn rounded-pill px-5 fw-bold" type="submit" style="font-family: 'Montserrat', sans-serif;">
+                            <input name="subscribe_email" class="form-control ps-4 pe-3 border-0 bg-transparent" type="email" placeholder="Enter business email address" style="font-family: 'Montserrat', sans-serif; color: #1e2229 !important;" required>
+                            <button name="subscribe" class="btn modern-subscribe-btn rounded-pill px-5 fw-bold" type="submit" style="font-family: 'Montserrat', sans-serif;">
                                 <span>Follow</span>
                             </button>
                         </div>

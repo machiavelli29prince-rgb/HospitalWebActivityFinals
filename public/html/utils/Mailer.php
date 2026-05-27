@@ -12,7 +12,7 @@ class MailerHelper
             @mkdir($this->emailLogDir, 0755, true);
         }
 
-        $autoload = __DIR__ . '/../vendor/autoload.php';
+        $autoload = __DIR__ . '/../../vendor/autoload.php';
         if (file_exists($autoload)) {
             require_once $autoload;
         }

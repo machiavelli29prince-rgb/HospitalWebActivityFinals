@@ -1,5 +1,5 @@
 <?php
-require_once('config/config.php');
+require_once __DIR__ . '/../core/config.php';
 
 class Database{
 

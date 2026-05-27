@@ -1,9 +1,9 @@
 <?php
-require_once 'bootstrap.php';
+require_once __DIR__ . '/../core/bootstrap.php';
 
 // 1. Protection Rule: Redirect guests back to the index authentication panel
 if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php#auth-section');
+    header('Location: ../index.php#auth-section');
     exit();
 }
 
@@ -51,7 +51,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <a class="navbar-brand fw-bold" href="#">Rodencia Patient Desk</a>
         <div class="ms-auto d-flex align-items-center gap-3">
             <span class="text-white small fw-bold"><i class="bi bi-person-circle"></i> Connected: <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-            <a href="logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
+            <a href="../logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
         </div>
     </div>
 </nav>
@@ -67,7 +67,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     </h5>
                 </div>
                 <div class="card-body p-4">
-                    <form action="<?php echo $currentAppointment ? 'updateAppointment.php' : 'process-appointment.php'; ?>" method="POST">
+                    <form action="<?php echo $currentAppointment ? '../controllers/updateAppointment.php' : '../controllers/process-appointment.php'; ?>" method="POST">
                         <?php if ($currentAppointment) { ?>
                             <input type="hidden" name="id" value="<?php echo $currentAppointment->id; ?>">
                             <input type="hidden" name="update" value="1">
@@ -168,7 +168,7 @@ function cancelAppointment(id) {
         cancelButtonColor: '#6c757d',
         confirmButtonText: 'Yes, Delete Row'
     }).then((result) => {
-        if (result.isConfirmed) { window.location.href = "deleteAppointment.php?id=" + id; }
+        if (result.isConfirmed) { window.location.href = "../controllers/deleteAppointment.php?id=" + id; }
     });
 }
 </script>

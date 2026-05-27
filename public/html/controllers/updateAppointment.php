@@ -1,8 +1,8 @@
 <?php
-require_once 'bootstrap.php';
+require_once __DIR__ . '/../core/bootstrap.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: auth.php');
+    header('Location: ../views/auth.php');
     exit();
 }
 
@@ -13,12 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $currentRecord = $appointment->fetchById($appointment->id);
 
     if (!$currentRecord) {
-        header('Location: users.php');
+        header('Location: ../views/users.php');
         exit();
     }
 
     if ($_SESSION['user_role'] === 'patient' && $currentRecord->user_id != $_SESSION['user_id']) {
-        header('Location: users.php?error=unauthorized');
+        header('Location: ../views/users.php?error=unauthorized');
         exit();
     }
 
@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         );
 
         if (isset($_POST['update']) && $_POST['update'] === '1') {
-            header('Location: users.php?updated=1');
+            header('Location: ../views/users.php?updated=1');
         } else {
-            header('Location: doctor.php?updated=1');
+            header('Location: ../views/doctor.php?updated=1');
         }
         exit();
     }
@@ -52,12 +52,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $currentPatient = $appointment->fetchById($appointment->id);
     
     if (!$currentPatient) {
-        header('Location: users.php');
+        header('Location: ../views/users.php');
         exit();
     }
 
     if ($_SESSION['user_role'] === 'patient' && $currentPatient->user_id != $_SESSION['user_id']) {
-        header('Location: users.php?error=unauthorized');
+        header('Location: ../views/users.php?error=unauthorized');
         exit();
     }
 }

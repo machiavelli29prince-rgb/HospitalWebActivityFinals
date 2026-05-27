@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'bootstrap.php';
+require_once __DIR__ . '/core/bootstrap.php';
 
 $error = '';
 $success = '';
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($auth->register($name, $email, $password, $role)) {
                     $success = 'Account created successfully! You can now log in.';
                 } else {
-                    $error = 'An error occurred while creating your account.';
+                    $error = $auth->getLastError() ?: 'An error occurred while creating your account.';
                 }
             }
         } else {
@@ -47,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_role'] = $user->role;
 
                 if ($user->role === 'doctor') {
-                    header('Location: doctor.php');
+                    header('Location: views/doctor.php');
                 } else {
-                    header('Location: users.php');
+                    header('Location: views/users.php');
                 }
                 exit();
             }
@@ -90,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/rodencia.png" type="image/png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/animate.min.css">
     <link rel="stylesheet" href="../css/aos.css">
@@ -167,8 +168,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark py-4">
-                <a class="navbar-brand" href="#">
-                    <h1 class="h3 mt-0">Rodencia</h1>
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="../img/rodencia.png" alt="Rodencia" width="40" height="40" class="me-2">
+                    <span class="h5 mb-0">Rodencia</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
                     data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -218,6 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="mb-4">
                                     <label class="form-label small fw-bold">Password</label>
                                     <input type="password" name="password" class="form-control" required autocomplete="current-password">
+                                    <div class="form-text small text-muted">Forgot your password? <a href="views/forgot-password.php">Reset it here</a>.</div>
                                 </div>
                                 <button type="submit" name="login" class="btn bg-green-primary text-white w-100 py-2 fw-bold shadow-sm">Sign Into System</button>
                             </form>
@@ -234,7 +237,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label small fw-bold">Secure Password</label>
-                                    <input type="password" name="password" class="form-control" required autocomplete="new-password">
+                                    <input type="password" name="password" class="form-control" required autocomplete="new-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="At least 8 characters including uppercase, lowercase, number, and special character.">
+                                    <div class="form-text small text-muted">Password must be at least 8 characters and include uppercase, lowercase, number, and special character.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label small fw-bold">System Role</label>

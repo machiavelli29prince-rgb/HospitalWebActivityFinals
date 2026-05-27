@@ -1,9 +1,9 @@
 <?php
-require_once 'bootstrap.php';
+require_once __DIR__ . '/../core/bootstrap.php';
 
 // Verification check: Ensure only logged-in patients can trigger data insertion loops
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
-    header('Location: auth.php');
+    header('Location: ../views/auth.php');
     exit();
 }
 
@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "Your appointment in {$appointment->department} at {$appointment->time} has been confirmed."
         );
 
-        header('Location: users.php?added=1');
+        header('Location: ../views/users.php?added=1');
     } else {
-        header('Location: users.php?error=1');
+        header('Location: ../views/users.php?error=1');
     }
     exit();
 }

@@ -1,9 +1,9 @@
 <?php
-require_once 'bootstrap.php';
+require_once __DIR__ . '/../core/bootstrap.php';
 
 // Strict Access Rules: Redirect unauthorized accounts back to index homepage panel
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
-    header('Location: index.php#auth-section');
+    header('Location: ../index.php#auth-section');
     exit();
 }
 
@@ -25,7 +25,7 @@ $patient_list = $appointmentLib->fetchByDepartment($current_dept);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
     <style>
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; }
         .bg-green-light { background-color: #e8f5e9 !important; }
@@ -40,7 +40,7 @@ $patient_list = $appointmentLib->fetchByDepartment($current_dept);
             <a class="navbar-brand fw-bold" href="#">Rodencia Staff Panel</a>
             <div class="ms-auto d-flex align-items-center gap-3">
                 <span class="text-white small fw-bold"><i class="bi bi-shield-lock-fill"></i> Specialist: <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                <a href="logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
+                <a href="../logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
             </div>
         </div>
     </nav>
@@ -93,7 +93,7 @@ $patient_list = $appointmentLib->fetchByDepartment($current_dept);
                                                     </span>
                                                 </td>
                                                 <td class="p-3 text-center">
-                                                    <a href="deleteAppointment.php?id=<?php echo $patient->id; ?>" 
+                                                    <a href="../controllers/deleteAppointment.php?id=<?php echo $patient->id; ?>" 
                                                        class="btn btn-sm btn-outline-danger px-3"
                                                        onclick="return confirm('Remove this appointment permanently?');">
                                                         Remove

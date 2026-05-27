@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
+// Auth Guard: Kicks non-authenticated traffic out to login index
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views/auth.php');
     exit();

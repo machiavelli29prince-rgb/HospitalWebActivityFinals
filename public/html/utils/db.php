@@ -13,8 +13,8 @@ class Database{
     private $stmt;
     private $dbconnected=false;
 
+    // Database Driver: Spawns persistent PDO connection streams using database constants
     function __construct(){
-        //PDO connection
         $dsn='mysql:host='.$this->host.";dbname=".$this->dbname;
         $option=array(
             PDO::ATTR_PERSISTENT=>true,
@@ -32,14 +32,8 @@ class Database{
         }
     }
 
-    function getError(){
-        return $this->error;
-    }
-    function isConnected(){
-        return $this->dbconnected;
-    }
-
-    //statement with query
+    function getError(){ return $this->error; }
+    function isConnected(){ return $this->dbconnected; }
 
     function query($query){
         $this->stmt=$this->connection->prepare($query);
@@ -56,6 +50,7 @@ class Database{
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    // Query Method: Restricts and returns exactly one mapped object entry row
     function single(){
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
@@ -85,9 +80,7 @@ class Database{
                     $type=PDO::PARAM_STR;
             }
         }
-
         $this->stmt->bindValue($param,$value,$type);
     }
 }
-
 ?>

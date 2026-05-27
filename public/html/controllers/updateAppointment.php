@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
+// Auth Guard: Universal authentication checkpoint rule
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../views/auth.php');
     exit();

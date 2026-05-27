@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_email'] = $user->email;
                 $_SESSION['user_role'] = $user->role;
 
+                // Authorization Router: Directs traffic paths based on roles mapped to accounts
                 if ($user->role === 'doctor') {
                     header('Location: views/doctor.php');
                 } else {
@@ -99,56 +100,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        /* Smooth scrolling behavior for navigation anchors */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Main green brand colors */
-        .bg-green-primary { background-color: #2e7d32 !important; color: white !important; } /* Deep medical green */
+        html { scroll-behavior: smooth; }
+        .bg-green-primary { background-color: #2e7d32 !important; color: white !important; } 
         .bg-green-primary:hover { background-color: #1b5e20 !important; }
-        
-        .bg-green-accent { background-color: #4caf50 !important; color: white !important; } /* Mid-tone green */
+        .bg-green-accent { background-color: #4caf50 !important; color: white !important; } 
         .bg-green-accent:hover { background-color: #388e3c !important; }
-
-        .bg-green-light { background-color: #e8f5e9 !important; } /* Soft light green tint background */
-        .text-green-primary { color: #2e7d32 !important; } /* Deep green for text highlights */
-        
-        /* Team Profile Image Handler */
-        .team-img-container {
-            width: 100%;
-            height: 250px;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .team-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Hover effect indicating the card can be interacted with */
-        .clickable-team-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .clickable-team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
-        }
-
-        /* Fixes the Bootstrap modal backdrop overlay bug */
-        .modal {
-            z-index: 1060 !important;
-        }
-        .modal-backdrop {
-            z-index: 1050 !important;
-        }
-
-        /* Form Switch Tabs */
+        .bg-green-light { background-color: #e8f5e9 !important; } 
+        .text-green-primary { color: #2e7d32 !important; } 
+        .team-img-container { width: 100%; height: 250px; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .team-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .clickable-team-card { cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .clickable-team-card:hover { transform: translateY(-5px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; }
+        .modal { z-index: 1060 !important; }
+        .modal-backdrop { z-index: 1050 !important; }
         .auth-tab { cursor: pointer; padding: 12px; text-align: center; font-weight: bold; border-bottom: 2px solid transparent; transition: 0.2s ease; }
         .auth-tab.active { border-bottom: 2px solid #2e7d32; color: #2e7d32; background-color: #f8f9fa; }
     </style>
@@ -700,7 +664,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         AOS.init();
 
-        // JS function to switch form tabs cleanly
+        // UI Scripting Engine: Manipulates the DOM CSS style rules to slide sub-forms back and forth
         function switchAuthTab(type) {
             const loginTab = document.getElementById('tab-login');
             const signupTab = document.getElementById('tab-signup');
@@ -720,7 +684,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Auto-show signup tab if registration fails or succeeds during submission
+        // View Validation Handler: Runs a PHP intercept query to force-keep the registration container open if submission updates fail
         <?php if (isset($_POST['signup'])): ?>
             switchAuthTab('signup');
         <?php endif; ?>

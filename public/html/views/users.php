@@ -1,13 +1,13 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
-// 1. Protection Rule: Redirect guests back to the index authentication panel
+// Auth Guard: Redirects guest users away from private system space
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../index.php#auth-section');
     exit();
 }
 
-// 2. Protection Rule: Prevent doctors from logging patient view states
+// Access Guard: Restricts medical staff from accessing patient specific view states
 if ($_SESSION['user_role'] === 'doctor') {
     header("Location: doctor.php");
     exit();
@@ -17,6 +17,7 @@ $post = new Appointment();
 $posts = $post->fetchByUser((int) $_SESSION['user_id']);
 $currentAppointment = null;
 
+// Routing Pre-Processor: Checks entity parameters before populating modification interfaces
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $post->id = (int) $_GET['id'];
     $currentAppointment = $post->fetchById($post->id);
@@ -158,6 +159,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 </div>
 
 <script>
+// UI Component Interaction: Triggers user prompt confirmations before routing deletion requests
 function cancelAppointment(id) {
     Swal.fire({
         title: 'Cancel Appointment?',

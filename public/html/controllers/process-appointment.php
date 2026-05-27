@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
-// Verification check: Ensure only logged-in patients can trigger data insertion loops
+// Auth Guard: Enforces strict session verification for patients adding records
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
     header('Location: ../views/auth.php');
     exit();

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/bootstrap.php';
 
-// Strict Access Rules: Redirect unauthorized accounts back to index homepage panel
+// Access Guard: Enforces strict session verification for medical staff access states
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
     header('Location: ../index.php#auth-section');
     exit();
@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
 
 $appointmentLib = new Appointment();
 
+// Request Routing Pre-Processor: Sets and validates the current active clinic department parameter
 $departments = ["General Medicine", "Cardiology", "Pediatrics", "Neurology"];
 $current_dept = isset($_GET['dept']) ? $_GET['dept'] : "General Medicine";
 

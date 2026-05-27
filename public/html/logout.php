@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+// Security Session Destroyer: Clears arrays, flushes memory trackers, and invalidates browser cookies
 $_SESSION = array();
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();

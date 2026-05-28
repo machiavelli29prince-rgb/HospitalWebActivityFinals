@@ -23,23 +23,12 @@ function getAppBaseUrl(): string
         return $baseUrl;
     }
 
-    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-    $scriptFilename = realpath($_SERVER['SCRIPT_FILENAME'] ?? '') ?: '';
-    $documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '') ?: '';
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+    $position = strpos($scriptName, '/public');
 
-    $base = '';
-    $publicSegment = '/public';
-
-    if (($position = strpos($scriptName, $publicSegment)) !== false) {
-        $base = substr($scriptName, 0, $position + strlen($publicSegment));
-    } elseif ($scriptFilename && $documentRoot && strpos($scriptFilename, $documentRoot) === 0) {
-        $relativePath = str_replace('\\', '/', substr($scriptFilename, strlen($documentRoot)));
-        if (($fsPosition = strpos($relativePath, $publicSegment)) !== false) {
-            $base = substr($relativePath, 0, $fsPosition + strlen($publicSegment));
-        }
-    }
-
-    if (empty($base)) {
+    if ($position !== false) {
+        $base = substr($scriptName, 0, $position + strlen('/public'));
+    } else {
         $base = dirname($scriptName);
     }
 

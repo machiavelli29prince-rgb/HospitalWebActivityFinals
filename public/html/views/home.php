@@ -13,10 +13,10 @@ if (!function_exists('appUrl')) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<?php echo appUrl('img/rodencia.png'); ?>" type="image/png">
-    <link rel="stylesheet" href="<?php echo appUrl('css/main.css'); ?>">
-    <link rel="stylesheet" href="<?php echo appUrl('css/animate.min.css'); ?>">
-    <link rel="stylesheet" href="<?php echo appUrl('css/aos.css'); ?>">
-    <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('html/views/css/main.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('html/views/css/animate.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('html/views/css/aos.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('html/views/css/bootstrap-icons.css'); ?>">
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer crossorigin="anonymous"></script>
@@ -211,7 +211,7 @@ if (!function_exists('appUrl')) {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalKarl">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/karl.jpg'); ?>" alt="Karl Armand C. Dela Torre" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/karl.jpg'); ?>" alt="Karl Armand C. Dela Torre" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class='bi bi-person-fill h1 second-text-color'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Karl Armand C. Dela Torre</h5>
@@ -224,7 +224,7 @@ if (!function_exists('appUrl')) {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalRoland">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/roa.jpg'); ?>" alt="Roland Machiavelli L. Roa" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/roa.jpg'); ?>" alt="Roland Machiavelli L. Roa" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class='bi bi-person-fill h1 second-text-color'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Roland Machiavelli L. Roa</h5>
@@ -237,7 +237,7 @@ if (!function_exists('appUrl')) {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/jude.jpg'); ?>" alt="Jude Emmanuel M. Toralba" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/jude.jpg'); ?>" alt="Jude Emmanuel M. Toralba" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class='bi bi-person-fill h1 second-text-color'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Jude Emmanuel M. Toralba</h5>
@@ -250,7 +250,7 @@ if (!function_exists('appUrl')) {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalMatthew">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/matt.jpg'); ?>" alt="Matthew Franz T. Figueroa" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/matt.jpg'); ?>" alt="Matthew Franz T. Figueroa" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class='bi bi-person-fill h1 second-text-color'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Matthew Franz T. Figueroa</h5>
@@ -263,7 +263,7 @@ if (!function_exists('appUrl')) {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/gian.jpg'); ?>" alt="Gian Carlos Cayari" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/gian.jpg'); ?>" alt="Gian Carlos Cayari" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class='bi bi-person-fill h1 second-text-color'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Gian Carlos Cayari</h5>
@@ -632,10 +632,10 @@ if (!function_exists('appUrl')) {
         </div>
     </footer>
 
-    <script src="<?php echo appUrl('js/jquery-3.4.1.min.js'); ?>" defer></script>
-    <script src="<?php echo appUrl('js/bootstrap.bundle.min.js'); ?>" defer></script>
-    <script src="<?php echo appUrl('js/aos.js'); ?>" defer></script>
-    <script src="<?php echo appUrl('js/tools.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('html/views/js/jquery-3.4.1.min.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('html/views/js/bootstrap.bundle.min.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('html/views/js/aos.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('html/views/js/tools.js'); ?>" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') {

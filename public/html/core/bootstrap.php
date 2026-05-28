@@ -18,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Redirect the user back to the public login/auth page.
 function redirectToAuth(string $message = ''): void
 {
-    $location = 'index.php#auth-section';
+    $location = '../utils/index.php#auth-section';
     if (!empty($message)) {
         $location .= '?message=' . urlencode($message);
     }

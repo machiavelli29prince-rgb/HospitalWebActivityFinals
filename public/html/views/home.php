@@ -1,88 +1,3 @@
-<?php
-//enable errors during development for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once __DIR__ . '/core/bootstrap.php';
-
-$error = '';
-$success = '';
-$auth = new AuthController();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['signup'])) {
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $password = $_POST['password'];
-        $role = $_POST['role'];
-
-        if (!empty($name) && !empty($email) && !empty($password) && !empty($role)) {
-            if (User::emailExists($email)) {
-                $error = 'This email is already registered in our system.';
-            } else {
-                if ($auth->register($name, $email, $password, $role)) {
-                    $success = 'Account created successfully! You can now log in.';
-                } else {
-                    $error = $auth->getLastError() ?: 'An error occurred while creating your account.';
-                }
-            }
-        } else {
-            $error = 'Please fill out all mandatory registration fields.';
-        }
-    }
-
-    if (isset($_POST['login'])) {
-        $email = trim($_POST['email']);
-        $password = $_POST['password'];
-
-        if (!empty($email) && !empty($password)) {
-            $user = $auth->login($email, $password);
-
-            if ($user) {
-                session_regenerate_id(true);
-                $_SESSION['user_id'] = $user->id;
-                $_SESSION['user_name'] = $user->name;
-                $_SESSION['user_email'] = $user->email;
-                $_SESSION['user_role'] = $user->role;
-
-                // Authorization Router: Directs traffic paths based on roles mapped to accounts
-                if ($user->role === 'doctor') {
-                    header('Location: views/doctor.php');
-                } else {
-                    header('Location: views/users.php');
-                }
-                exit();
-            }
-
-            $error = 'Invalid email or password combination.';
-        } else {
-            $error = 'Please fill out all credential spaces.';
-        }
-    }
-
-    if (isset($_POST['subscribe'])) {
-        $subscribeEmail = trim($_POST['subscribe_email']);
-
-        if (!empty($subscribeEmail) && filter_var($subscribeEmail, FILTER_VALIDATE_EMAIL)) {
-            $mailer = new MailerHelper();
-            $subscriberSubject = 'Rodencia Health Advisory Subscription';
-            $subscriberBody = "<p>Thank you for following Rodencia Hospital.</p>" .
-                "<p>You will receive official clinical updates, health advisories, and research news from our medical board.</p>" .
-                "<p>If you want to manage your subscription, reply to this email or contact our support team.</p>";
-
-            // Attempt to send email - for local development, this may not deliver but won't throw errors
-            $mailer->sendEmail($subscribeEmail, $subscriberSubject, $subscriberBody);
-            
-            // Always show success - emails will be logged even if local mail() doesn't deliver
-            $success = 'Thank you for subscribing! Check your email for confirmation details.';
-        } else {
-            $error = 'Please provide a valid business email address to subscribe.';
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -755,7 +670,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         position: fixed; 
         top: 0; left: 0; 
         width: 100%; height: 100%; 
-        background: rgba(14, 22, 15, 0.95); 
+        background: rgba(14, 22, 15, 0.95);
         border: 10px solid #2ecc71;
         z-index: 99999; 
         justify-content: center; 

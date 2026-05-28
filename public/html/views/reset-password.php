@@ -1,28 +1,4 @@
-<?php
-require_once __DIR__ . '/../core/bootstrap.php';
-
-$error = '';
-$success = '';
-$auth = new AuthController();
-$token = trim($_GET['token'] ?? $_POST['token'] ?? '');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $password = $_POST['password'] ?? '';
-    $confirmPassword = $_POST['confirm_password'] ?? '';
-
-    if (empty($token)) {
-        $error = 'Password reset token is missing. Please use the link from your email.';
-    } elseif (empty($password) || empty($confirmPassword)) {
-        $error = 'Please enter and confirm your new password.';
-    } elseif ($password !== $confirmPassword) {
-        $error = 'The passwords do not match. Please try again.';
-    } elseif ($auth->resetPassword($token, $password)) {
-        $success = 'Your password has been reset successfully. You may now sign in with your new password.';
-    } else {
-        $error = $auth->getLastError() ?: 'Unable to reset your password. Please try again or request a new link.';
-    }
-}
-?>
+<?php require_once __DIR__ . '/../controllers/resetPasswordController.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-green-primary">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="../index.php">Rodencia Hospital</a>
+            <a class="navbar-brand fw-bold" href="../utils/index.php">Rodencia Hospital</a>
         </div>
     </nav>
 
@@ -77,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endif; ?>
 
                         <div class="mt-4 text-center">
-                            <a href="../index.php#auth-section" class="text-green-primary small">Back to sign in</a>
+                            <a href="../utils/index.php#auth-section" class="text-green-primary small">Back to sign in</a>
                         </div>
                     </div>
                 </div>

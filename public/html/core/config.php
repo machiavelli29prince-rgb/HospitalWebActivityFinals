@@ -3,7 +3,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'rodencia');
+define('DB_NAME', 'hospice');
 
 define('SMTP_HOST', 'smtp.gmail.com');
 define('SMTP_PORT', 587);

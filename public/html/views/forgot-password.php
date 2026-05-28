@@ -1,21 +1,4 @@
-<?php
-require_once __DIR__ . '/../core/bootstrap.php';
-
-$error = '';
-$success = '';
-$auth = new AuthController();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
-
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Please enter a valid email address to continue.';
-    } else {
-        $auth->requestPasswordReset($email);
-        $success = 'If an account exists for that email, a password reset link has been sent. Please check your inbox.';
-    }
-}
-?>
+<?php require_once __DIR__ . '/../controllers/forgotPasswordController.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-green-primary">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="../index.php">Rodencia Hospital</a>
+            <a class="navbar-brand fw-bold" href="../utils/index.php">Rodencia Hospital</a>
         </div>
     </nav>
 
@@ -64,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </form>
 
                         <div class="mt-4 text-center">
-                            <a href="../index.php#auth-section" class="text-green-primary small">Back to sign in</a>
+                            <a href="../utils/index.php#auth-section" class="text-green-primary small">Back to sign in</a>
                         </div>
                     </div>
                 </div>

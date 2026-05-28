@@ -3,7 +3,7 @@ require_once __DIR__ . '/../core/bootstrap.php';
 
 // Only authenticated users can update appointment records.
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../views/auth.php');
+    header('Location: ' . appUrl('html/views/auth.php'));
     exit();
 }
 
@@ -15,12 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $currentRecord = $appointment->fetchById($appointment->id);
 
     if (!$currentRecord) {
-        header('Location: ../views/users.php');
+        header('Location: ' . appUrl('html/views/users.php'));
         exit();
     }
 
     if ($_SESSION['user_role'] === 'patient' && $currentRecord->user_id != $_SESSION['user_id']) {
-        header('Location: ../views/users.php?error=unauthorized');
+        header('Location: ' . appUrl('html/views/users.php?error=unauthorized'));
         exit();
     }
 
@@ -39,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         );
 
         if (isset($_POST['update']) && $_POST['update'] === '1') {
-            header('Location: ../views/users.php?updated=1');
+            header('Location: ' . appUrl('html/views/users.php?updated=1'));
         } else {
-            header('Location: ../views/doctor.php?updated=1');
+            header('Location: ' . appUrl('html/views/doctor.php?updated=1'));
         }
         exit();
     }
@@ -54,12 +54,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $appointment->id = (int) $_GET['id'];
     $currentPatient = $appointment->fetchById($appointment->id);
     if (!$currentPatient) {
-        header('Location: ../views/users.php');
+        header('Location: ' . appUrl('html/views/users.php'));
         exit();
     }
 
     if ($_SESSION['user_role'] === 'patient' && $currentPatient->user_id != $_SESSION['user_id']) {
-        header('Location: ../views/users.php?error=unauthorized');
+        header('Location: ' . appUrl('html/views/users.php?error=unauthorized'));
         exit();
     }
 }

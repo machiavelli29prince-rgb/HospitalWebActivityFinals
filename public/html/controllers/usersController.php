@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Access Guard: Restricts medical staff from accessing patient specific view states
 if ($_SESSION['user_role'] === 'doctor') {
-    header('Location: doctor.php');
+    header('Location: ' . appUrl('html/views/doctor.php'));
     exit();
 }
 
@@ -23,7 +23,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $currentAppointment = $post->fetchById($post->id);
 
     if ($currentAppointment && $currentAppointment->user_id != $_SESSION['user_id']) {
-        header('Location: users.php?error=unauthorized');
+        header('Location: ' . appUrl('html/views/users.php?error=unauthorized'));
         exit();
     }
 }

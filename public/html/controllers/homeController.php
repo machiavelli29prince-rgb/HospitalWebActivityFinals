@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_role'] = $user->role;
 
                 if ($user->role === 'doctor') {
-                    header('Location: views/doctor.php');
+                    header('Location: ' . appUrl('html/views/doctor.php'));
                 } else {
-                    header('Location: views/users.php');
+                    header('Location: ' . appUrl('html/views/users.php'));
                 }
                 exit();
             }

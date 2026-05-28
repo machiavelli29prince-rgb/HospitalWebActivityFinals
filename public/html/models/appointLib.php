@@ -16,12 +16,37 @@ class User
     public function __construct()
     {
         $this->db = new Database();
+        $this->ensureTableExists();
+    }
+
+    // Ensure the users table exists before any user operations.
+    private function ensureTableExists(): void
+    {
+        $createSql = 'CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            role ENUM(\'patient\', \'doctor\') NOT NULL DEFAULT \'patient\',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4';
+
+        $this->db->createTableIfMissing('users', $createSql);
     }
 
     // Check if an email is already registered.
     public static function emailExists(string $email): bool
     {
         $db = new Database();
+        $createSql = 'CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            role ENUM(\'patient\', \'doctor\') NOT NULL DEFAULT \'patient\',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4';
+        $db->createTableIfMissing('users', $createSql);
         $db->query('SELECT id FROM users WHERE email = :email');
         $db->bind(':email', $email);
         return (bool) $db->single();
@@ -114,6 +139,25 @@ class Appointment
     public function __construct()
     {
         $this->db = new Database();
+        $this->ensureTableExists();
+    }
+
+    // Ensure the appointments table exists before appointment operations.
+    private function ensureTableExists(): void
+    {
+        $createSql = 'CREATE TABLE IF NOT EXISTS appointments (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL,
+            department VARCHAR(255) NOT NULL,
+            time VARCHAR(50) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            INDEX (user_id),
+            INDEX (department)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4';
+
+        $this->db->createTableIfMissing('appointments', $createSql);
     }
 
     // Retrieve all appointments.
@@ -319,7 +363,7 @@ class AuthController
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         $scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '/');
 
-        if (in_array(basename($scriptDir), ['controllers', 'views'], true)) {
+        while (in_array(basename($scriptDir), ['controllers', 'views', 'utils'], true)) {
             $scriptDir = dirname($scriptDir);
         }
 

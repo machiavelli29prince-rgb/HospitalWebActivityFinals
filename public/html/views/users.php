@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Patient Portal - Rodencia Hospital</title>
     <style>
@@ -39,7 +40,7 @@
                     </h5>
                 </div>
                 <div class="card-body p-4">
-                    <form action="<?php echo $currentAppointment ? '../controllers/updateAppointment.php' : '../controllers/process-appointment.php'; ?>" method="POST">
+                    <form action="<?php echo $currentAppointment ? appUrl('html/controllers/updateAppointment.php') : appUrl('html/controllers/process-appointment.php'); ?>" method="POST">
                         <?php if ($currentAppointment) { ?>
                             <input type="hidden" name="id" value="<?php echo $currentAppointment->id; ?>">
                             <input type="hidden" name="update" value="1">
@@ -141,7 +142,7 @@ function cancelAppointment(id) {
         cancelButtonColor: '#6c757d',
         confirmButtonText: 'Yes, Delete Row'
     }).then((result) => {
-        if (result.isConfirmed) { window.location.href = "../controllers/deleteAppointment.php?id=" + id; }
+        if (result.isConfirmed) { window.location.href = "<?php echo appUrl('html/controllers/deleteAppointment.php'); ?>?id=" + id; }
     });
 }
 </script>

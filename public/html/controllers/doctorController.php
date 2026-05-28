@@ -3,7 +3,7 @@ require_once __DIR__ . '/../core/bootstrap.php';
 
 // Access Guard: Enforces strict session verification for medical staff access states
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
-    header('Location: ../utils/index.php#auth-section');
+    header('Location: ' . appUrl('html/utils/index.php#auth-section'));
     exit();
 }
 

@@ -3,7 +3,7 @@ require_once __DIR__ . '/../core/bootstrap.php';
 
 // Only logged-in users may delete appointments.
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../views/auth.php');
+    header('Location: ' . appUrl('html/views/auth.php'));
     exit();
 }
 
@@ -14,28 +14,28 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     $currentRecord = $appointment->fetchById($appointment->id);
     if (!$currentRecord) {
-        header('Location: ../views/users.php');
+        header('Location: ' . appUrl('html/views/users.php'));
         exit();
     }
 
     // Prevent patients from deleting other users' appointments.
     if ($_SESSION['user_role'] === 'patient' && $currentRecord->user_id != $_SESSION['user_id']) {
-        header('Location: ../views/users.php?error=unauthorized');
+        header('Location: ' . appUrl('html/views/users.php?error=unauthorized'));
         exit();
     }
 
     if ($appointment->delete()) {
         if ($_SESSION['user_role'] === 'doctor') {
-            header('Location: ../views/doctor.php?deleted=1');
+            header('Location: ' . appUrl('html/views/doctor.php?deleted=1'));
         } else {
-            header('Location: ../views/users.php?deleted=1');
+            header('Location: ' . appUrl('html/views/users.php?deleted=1'));
         }
         exit();
     }
 
     echo 'Error: High level structural update rejection.';
 } else {
-    header('Location: ../views/auth.php');
+    header('Location: ' . appUrl('html/views/auth.php'));
     exit();
 }
 ?>

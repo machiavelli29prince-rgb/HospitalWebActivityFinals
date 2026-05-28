@@ -15,13 +15,35 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Build the root URL for the current application path. Uses the first /public segment as the web root.
+function getAppBaseUrl(): string
+{
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $position = strpos($scriptName, '/public');
+
+    if ($position !== false) {
+        $base = substr($scriptName, 0, $position + strlen('/public'));
+    } else {
+        $base = dirname($scriptName);
+    }
+
+    return rtrim($base, '/');
+}
+
+// Resolve a web-relative path from the application root.
+function appUrl(string $path = ''): string
+{
+    return rtrim(getAppBaseUrl(), '/') . '/' . ltrim($path, '/');
+}
+
 // Redirect the user back to the public login/auth page.
 function redirectToAuth(string $message = ''): void
 {
-    $location = '../utils/index.php#auth-section';
+    $location = appUrl('html/utils/index.php');
     if (!empty($message)) {
         $location .= '?message=' . urlencode($message);
     }
+    $location .= '#auth-section';
     header('Location: ' . $location);
     exit();
 }

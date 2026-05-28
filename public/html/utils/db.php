@@ -82,6 +82,25 @@ class Database
         return $this->connection->lastInsertId();
     }
 
+    // Check whether the given table exists in the current database.
+    public function tableExists(string $tableName): bool
+    {
+        $this->query('SHOW TABLES LIKE :table');
+        $this->bind(':table', $tableName);
+        return (bool) $this->single();
+    }
+
+    // Create a table if it does not already exist, then return whether the operation succeeded.
+    public function createTableIfMissing(string $tableName, string $createSql): bool
+    {
+        if ($this->tableExists($tableName)) {
+            return true;
+        }
+
+        $this->query($createSql);
+        return $this->execute();
+    }
+
     // Bind a value to the prepared statement using the correct PDO type.
     public function bind($param, $value, $type = null)
     {

@@ -1,16 +1,18 @@
+<?php require_once __DIR__ . '/../core/bootstrap.php'; ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
+    <?php $appBase = appUrl(''); ?>
     <title>Rodencia Hospital</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../img/rodencia.png" type="image/png">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/animate.min.css">
-    <link rel="stylesheet" href="../css/aos.css">
-    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="icon" href="<?php echo appUrl('img/rodencia.png'); ?>" type="image/png">
+    <link rel="stylesheet" href="<?php echo appUrl('css/main.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('css/animate.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('css/aos.css'); ?>">
+    <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -42,13 +44,13 @@
     ?>
     <header class="position-relative" data-aos="fade-down">
         <div class="background position-absolute z-index_-1 w-100 h-100">
-            <img class="cover" src="../img/hero-cover.5.jpg" alt="Cover Image">
+            <img class="cover" src="<?php echo appUrl('img/hero-cover.5.jpg'); ?>" alt="Cover Image">
             <div class="filter basic"></div>
         </div>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark py-4">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="../img/rodencia.png" alt="Rodencia" width="40" height="40" class="me-2">
+                    <img src="<?php echo appUrl('img/rodencia.png'); ?>" alt="Rodencia" width="40" height="40" class="me-2">
                     <span class="h5 mb-0">Rodencia</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent"
@@ -90,7 +92,7 @@
                                 <div class="alert alert-success p-2 small"><?php echo htmlspecialchars($success); ?></div>
                             <?php endif; ?>
 
-                            <form id="form-login-block" action="index.php#auth-section" method="POST">
+                            <form id="form-login-block" action="<?php echo appUrl('index.php#auth-section'); ?>" method="POST">
                                 <h5 class="fw-bold text-dark mb-3">Welcome Back</h5>
                                 <div class="mb-3">
                                     <label class="form-label small fw-bold">Email Address</label>
@@ -99,12 +101,12 @@
                                 <div class="mb-4">
                                     <label class="form-label small fw-bold">Password</label>
                                     <input type="password" name="password" class="form-control" required autocomplete="current-password">
-                                    <div class="form-text small text-muted">Forgot your password? <a href="views/forgot-password.php">Reset it here</a>.</div>
+                                    <div class="form-text small text-muted">Forgot your password? <a href="<?php echo appUrl('html/views/forgot-password.php'); ?>">Reset it here</a>.</div>
                                 </div>
                                 <button type="submit" name="login" class="btn bg-green-primary text-white w-100 py-2 fw-bold shadow-sm">Sign Into System</button>
                             </form>
 
-                            <form id="form-signup-block" action="index.php#auth-section" method="POST" style="display: none;">
+                            <form id="form-signup-block" action="<?php echo appUrl('index.php#auth-section'); ?>" method="POST" style="display: none;">
                                 <h5 class="fw-bold text-green-primary mb-3">Registration Form</h5>
                                 <div class="mb-2">
                                     <label class="form-label small fw-bold">Full Name</label>
@@ -209,7 +211,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalKarl">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/karl.jpg" alt="Karl Armand C. Dela Torre" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/karl.jpg'); ?>" alt="Karl Armand C. Dela Torre" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Karl Armand C. Dela Torre</h5>
@@ -222,7 +224,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalRoland">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/roa.jpg" alt="Roland Machiavelli L. Roa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/roa.jpg'); ?>" alt="Roland Machiavelli L. Roa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Roland Machiavelli L. Roa</h5>
@@ -235,7 +237,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/jude.jpg" alt="Jude Emmanuel M. Toralba" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/jude.jpg'); ?>" alt="Jude Emmanuel M. Toralba" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Jude Emmanuel M. Toralba</h5>
@@ -248,7 +250,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalMatthew">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/matt.jpg" alt="Matthew Franz T. Figueroa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/matt.jpg'); ?>" alt="Matthew Franz T. Figueroa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Matthew Franz T. Figueroa</h5>
@@ -261,7 +263,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="../img/team/gian.jpg" alt="Gian Carlos Cayari" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/gian.jpg'); ?>" alt="Gian Carlos Cayari" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Gian Carlos Cayari</h5>
@@ -283,7 +285,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">
-                    <img src="../img/team/karl-popup.jpg" class="img-fluid w-100 rounded-bottom" alt="Karl Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Karl+Meme+Easter+Egg';">
+                    <img src="<?php echo appUrl('img/team/karl-popup.jpg'); ?>" class="img-fluid w-100 rounded-bottom" alt="Karl Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Karl+Meme+Easter+Egg';">
                 </div>
             </div>
         </div>
@@ -297,7 +299,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">
-                    <img src="../img/team/roa-popup.jpg" class="img-fluid w-100 rounded-bottom" alt="Roland Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Roland+Meme+Easter+Egg';">
+                    <img src="<?php echo appUrl('img/team/roa-popup.jpg'); ?>" class="img-fluid w-100 rounded-bottom" alt="Roland Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Roland+Meme+Easter+Egg';">
                 </div>
             </div>
         </div>
@@ -311,7 +313,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">    
-                    <img src="../img/team/matt-popup.jpg" class="img-fluid w-100 rounded-bottom" alt="Matthew Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Matthew+Meme+Easter+Egg';">
+                    <img src="<?php echo appUrl('img/team/matt-popup.jpg'); ?>" class="img-fluid w-100 rounded-bottom" alt="Matthew Easter Egg" onerror="this.src='https://via.placeholder.com/500x500?text=Matthew+Meme+Easter+Egg';">
                 </div>
             </div>
         </div>
@@ -334,7 +336,7 @@
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
                             <div class="icn-circle circle-md bg-white mx-auto mb-3">
-                                <img src="../img/genmed.png" alt="General Medicine Icon" class="dept-icon-img">
+                                <img src="<?php echo appUrl('img/genmed.png'); ?>" alt="General Medicine Icon" class="dept-icon-img">
                             </div>
                             <h5 class="h5 text-color font-weight-bold">General Medicine</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
@@ -349,7 +351,7 @@
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
                             <div class="icn-circle circle-md bg-white mx-auto mb-3">
-                                <img src="../img/cardio.jpg" alt="Cardiology Icon" class="dept-icon-img">
+                                <img src="<?php echo appUrl('img/cardio.jpg'); ?>" alt="Cardiology Icon" class="dept-icon-img">
                             </div>
                             <h5 class="h5 text-color font-weight-bold">Cardiology</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialists:</h6>
@@ -364,7 +366,7 @@
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
                             <div class="icn-circle circle-md bg-white mx-auto mb-3">
-                                <img src="../img/pedia.png" alt="Pediatrics Icon" class="dept-icon-img">
+                                <img src="<?php echo appUrl('img/pedia.png'); ?>" alt="Pediatrics Icon" class="dept-icon-img">
                             </div>
                             <h5 class="h5 text-color font-weight-bold">Pediatrics</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
@@ -379,7 +381,7 @@
                     <div class="card-item rounded bg-green-light border h-100" style="padding: 30px 25px">
                         <div class="card-content text-center">
                             <div class="icn-circle circle-md bg-white mx-auto mb-3">
-                                <img src="../img/neuro.png" alt="Neurology Icon" class="dept-icon-img">
+                                <img src="<?php echo appUrl('img/neuro.png'); ?>" alt="Neurology Icon" class="dept-icon-img">
                             </div>
                             <h5 class="h5 text-color font-weight-bold">Neurology</h5>
                             <h6 class="h6 text-muted mt-2 small">Assigned Specialist:</h6>
@@ -630,10 +632,10 @@
         </div>
     </footer>
 
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/aos.js"></script>
-    <script src="../js/tools.js"></script>
+    <script src="<?php echo appUrl('js/jquery-3.4.1.min.js'); ?>"></script>
+    <script src="<?php echo appUrl('js/bootstrap.bundle.min.js'); ?>"></script>
+    <script src="<?php echo appUrl('js/aos.js'); ?>"></script>
+    <script src="<?php echo appUrl('js/tools.js'); ?>"></script>
     <script>
         AOS.init();
 
@@ -663,7 +665,7 @@
         <?php endif; ?>
     </script>
 
-    <audio id="lizardAudio" src="../img/team/lizard-button.mp3" preload="auto"></audio>
+    <audio id="lizardAudio" src="<?php echo appUrl('img/team/lizard-button.mp3'); ?>" preload="auto"></audio>
 
     <div id="lizardOverlay" style="
         display: none; 

@@ -3,7 +3,7 @@ require_once __DIR__ . '/../core/bootstrap.php';
 
 // Ensure only a logged-in patient can create a new appointment.
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
-    header('Location: ../views/auth.php');
+    header('Location: ' . appUrl('html/views/auth.php'));
     exit();
 }
 
@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "Your appointment in {$appointment->department} at {$appointment->time} has been confirmed."
         );
 
-        header('Location: ../views/users.php?added=1');
+        header('Location: ' . appUrl('html/views/users.php?added=1'));
     } else {
-        header('Location: ../views/users.php?error=1');
+        header('Location: ' . appUrl('html/views/users.php?error=1'));
     }
     exit();
 }

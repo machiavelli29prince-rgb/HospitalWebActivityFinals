@@ -232,6 +232,7 @@ class PasswordReset
     private $db;
     public $id;
     public $user_id;
+    public $email;
     public $token;
     public $expires_at;
 
@@ -243,24 +244,70 @@ class PasswordReset
     // Ensure the password_resets table exists before using it.
     private function ensureTableExists(): void
     {
-        $this->db->query(
-            'CREATE TABLE IF NOT EXISTS password_resets (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT NOT NULL,
-                token VARCHAR(128) NOT NULL UNIQUE,
-                expires_at DATETIME NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
-        );
-        $this->db->execute();
+        if (!$this->db->tableExists('password_resets')) {
+            $this->db->query(
+                'CREATE TABLE IF NOT EXISTS password_resets (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id INT NULL,
+                    email VARCHAR(255) NULL,
+                    token VARCHAR(128) NOT NULL UNIQUE,
+                    expires_at DATETIME NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    INDEX (user_id),
+                    INDEX (email)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
+            );
+            $this->db->execute();
+            return;
+        }
+
+        if (!$this->db->columnExists('password_resets', 'user_id')) {
+            $this->db->query('ALTER TABLE password_resets ADD COLUMN user_id INT NULL AFTER email');
+            $this->db->execute();
+        }
+
+        if (!$this->db->columnExists('password_resets', 'id')) {
+            $this->db->query('ALTER TABLE password_resets ADD COLUMN id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST');
+            $this->db->execute();
+        }
+
+        if (!$this->db->columnExists('password_resets', 'created_at')) {
+            $this->db->query('ALTER TABLE password_resets ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP');
+            $this->db->execute();
+        }
+    }
+
+    private function hasUserIdColumn(): bool
+    {
+        return $this->db->columnExists('password_resets', 'user_id');
+    }
+
+    private function loadUserEmailById(int $userId): ?string
+    {
+        $user = new User();
+        if ($user->loadById($userId)) {
+            return $user->email;
+        }
+        return null;
     }
 
     // Store a new reset token for the user.
     public function create(int $userId, string $token, string $expiresAt): bool
     {
         $this->ensureTableExists();
-        $this->db->query('INSERT INTO password_resets (user_id, token, expires_at) VALUES (:user_id, :token, :expires_at)');
-        $this->db->bind(':user_id', $userId);
+
+        if ($this->hasUserIdColumn()) {
+            $this->db->query('INSERT INTO password_resets (user_id, token, expires_at) VALUES (:user_id, :token, :expires_at)');
+            $this->db->bind(':user_id', $userId);
+        } else {
+            $email = $this->loadUserEmailById($userId);
+            if (!$email) {
+                return false;
+            }
+            $this->db->query('INSERT INTO password_resets (email, token, expires_at) VALUES (:email, :token, :expires_at)');
+            $this->db->bind(':email', $email);
+        }
+
         $this->db->bind(':token', $token);
         $this->db->bind(':expires_at', $expiresAt);
 
@@ -279,8 +326,11 @@ class PasswordReset
             return false;
         }
 
-        $this->id = (int) $row->id;
-        $this->user_id = (int) $row->user_id;
+        if (isset($row->id)) {
+            $this->id = (int) $row->id;
+        }
+        $this->user_id = isset($row->user_id) ? (int) $row->user_id : null;
+        $this->email = isset($row->email) ? $row->email : null;
         $this->token = $row->token;
         $this->expires_at = $row->expires_at;
         return true;
@@ -290,8 +340,20 @@ class PasswordReset
     public function deleteByUserId(int $userId): bool
     {
         $this->ensureTableExists();
-        $this->db->query('DELETE FROM password_resets WHERE user_id = :user_id');
-        $this->db->bind(':user_id', $userId);
+
+        if ($this->hasUserIdColumn()) {
+            $this->db->query('DELETE FROM password_resets WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $userId);
+            return $this->db->execute();
+        }
+
+        $email = $this->loadUserEmailById($userId);
+        if (!$email) {
+            return false;
+        }
+
+        $this->db->query('DELETE FROM password_resets WHERE email = :email');
+        $this->db->bind(':email', $email);
         return $this->db->execute();
     }
 
@@ -474,7 +536,11 @@ class AuthController
         }
 
         $user = new User();
-        if (!$user->loadById($reset->user_id)) {
+        if ($reset->user_id && $user->loadById($reset->user_id)) {
+            // found by user ID
+        } elseif (!empty($reset->email) && $user->loadByEmail($reset->email)) {
+            // found by email fallback for older reset table schemas
+        } else {
             $this->lastError = 'Unable to find the account for this reset request.';
             return false;
         }

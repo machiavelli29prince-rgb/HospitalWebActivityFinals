@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
     <style>
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; }
         .bg-green-light { background-color: #e8f5e9 !important; }
@@ -21,7 +21,7 @@
             <a class="navbar-brand fw-bold" href="#">Rodencia Staff Panel</a>
             <div class="ms-auto d-flex align-items-center gap-3">
                 <span class="text-white small fw-bold"><i class="bi bi-shield-lock-fill"></i> Specialist: <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                <a href="../logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
+                <a href="<?php echo appUrl('html/logout.php'); ?>" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
             </div>
         </div>
     </nav>
@@ -34,7 +34,7 @@
                     <h6 class="fw-bold text-muted mb-3 small text-uppercase">Department Nodes</h6>
                     <div class="nav flex-column nav-pills">
                         <?php foreach ($departments as $dept): ?>
-                            <a href="doctor.php?dept=<?php echo urlencode($dept); ?>" 
+                            <a href="<?php echo appUrl('html/views/doctor.php?dept=' . urlencode($dept)); ?>" 
                                class="nav-link p-3 mb-2 text-dark <?php echo ($current_dept === $dept) ? 'active' : 'bg-light'; ?>">
                                 <i class="bi bi-heart-pulse-fill me-2"></i> <?php echo $dept; ?>
                             </a>
@@ -74,7 +74,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="p-3 text-center">
-                                                    <a href="../controllers/deleteAppointment.php?id=<?php echo $patient->id; ?>" 
+                                                    <a href="<?php echo appUrl('html/controllers/deleteAppointment.php?id=' . urlencode($patient->id)); ?>" 
                                                        class="btn btn-sm btn-outline-danger px-3"
                                                        onclick="return confirm('Remove this appointment permanently?');">
                                                         Remove

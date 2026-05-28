@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password | Rodencia Hospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
     <style>
         body { background-color: #f5f5f5; }
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; }
@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-green-primary">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="../utils/index.php">Rodencia Hospital</a>
+            <a class="navbar-brand fw-bold" href="<?php echo appUrl('html/utils/index.php'); ?>">Rodencia Hospital</a>
         </div>
     </nav>
 
@@ -38,7 +38,7 @@
 
                         <p class="text-muted small mb-4">Enter the email address linked to your Rodencia account. We will send a secure reset link that expires in one hour.</p>
 
-                        <form method="POST" action="forgot-password.php">
+                        <form method="POST" action="<?php echo appUrl('html/views/forgot-password.php'); ?>">
                             <div class="mb-3">
                                 <label class="form-label small fw-bold">Registered Email Address</label>
                                 <input type="email" name="email" class="form-control" required autocomplete="email">
@@ -47,7 +47,7 @@
                         </form>
 
                         <div class="mt-4 text-center">
-                            <a href="../utils/index.php#auth-section" class="text-green-primary small">Back to sign in</a>
+                            <a href="<?php echo appUrl('html/utils/index.php#auth-section'); ?>" class="text-green-primary small">Back to sign in</a>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . '/../core/bootstrap.php'; ?>
+<?php
+if (!function_exists('appUrl')) {
+    require_once __DIR__ . '/../core/bootstrap.php';
+}
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -14,7 +18,8 @@
     <link rel="stylesheet" href="<?php echo appUrl('css/aos.css'); ?>">
     <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer crossorigin="anonymous"></script>
 
     <style>
         html { scroll-behavior: smooth; }
@@ -37,11 +42,6 @@
 
 <body>
 
-    <?php
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    ?>
     <header class="position-relative" data-aos="fade-down">
         <div class="background position-absolute z-index_-1 w-100 h-100">
             <img class="cover" src="<?php echo appUrl('img/hero-cover.5.jpg'); ?>" alt="Cover Image">
@@ -211,7 +211,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalKarl">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/karl.jpg'); ?>" alt="Karl Armand C. Dela Torre" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/karl.jpg'); ?>" alt="Karl Armand C. Dela Torre" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Karl Armand C. Dela Torre</h5>
@@ -224,7 +224,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalRoland">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/roa.jpg'); ?>" alt="Roland Machiavelli L. Roa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/roa.jpg'); ?>" alt="Roland Machiavelli L. Roa" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Roland Machiavelli L. Roa</h5>
@@ -237,7 +237,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/jude.jpg'); ?>" alt="Jude Emmanuel M. Toralba" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/jude.jpg'); ?>" alt="Jude Emmanuel M. Toralba" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Jude Emmanuel M. Toralba</h5>
@@ -250,7 +250,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card" data-bs-toggle="modal" data-bs-target="#modalMatthew">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/matt.jpg'); ?>" alt="Matthew Franz T. Figueroa" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/matt.jpg'); ?>" alt="Matthew Franz T. Figueroa" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Matthew Franz T. Figueroa</h5>
@@ -263,7 +263,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card-item round border shadow-sm h-100 clickable-team-card">
                         <div class="team-img-container rounded-top">
-                            <img src="<?php echo appUrl('img/team/gian.jpg'); ?>" alt="Gian Carlos Cayari" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
+                            <img src="<?php echo appUrl('img/team/gian.jpg'); ?>" alt="Gian Carlos Cayari" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'bi bi-person-fill h1 second-text-color\'></i>';">
                         </div>
                         <div class="card-content text-center py-4 px-3">
                             <h5 class="h5 text-color font-weight-bold">Gian Carlos Cayari</h5>
@@ -591,9 +591,9 @@
                     <h3 class="h3 footer-heading fw-bold mb-4" style="font-family: 'Montserrat', sans-serif;">Institutional Profile</h3>
 <div class="footer-links-list d-flex flex-column">
     <div class="footer-links-list d-flex flex-column">
-    <a class="footer-link-item mb-2" href="index.php#about">About Our Medical System</a>
-    <a class="footer-link-item mb-2" href="index.php#team">Clinical Operations Team</a>
-    <a class="footer-link-item mb-2" href="index.php#auth-section">Physician Consultation Scheduler</a>
+    <a class="footer-link-item mb-2" href="<?php echo appUrl('index.php#about'); ?>">About Our Medical System</a>
+    <a class="footer-link-item mb-2" href="<?php echo appUrl('index.php#team'); ?>">Clinical Operations Team</a>
+    <a class="footer-link-item mb-2" href="<?php echo appUrl('index.php#auth-section'); ?>">Physician Consultation Scheduler</a>
 </div>
     <a class="footer-link-item" href="#">Hospital Governance Board</a>
 </div>
@@ -612,10 +612,10 @@
                 <div class="col-xl-3 col-md-6">
                     <h3 class="h3 footer-heading fw-bold mb-4" style="font-family: 'Montserrat', sans-serif;">Patient Resources</h3>
 <div class="footer-links-list d-flex flex-column">
-    <a class="footer-link-item mb-2" href="#about">Mobile Electronic Health Record App</a>
-<a class="footer-link-item mb-2" href="#auth-section">Physician Consultation Scheduler</a>
-    <a class="footer-link-item mb-2" href="#faq">Privacy & Statutory Legal Compliance</a>
-    <a class="footer-link-item" href="index.php#auth-section">Developer API & Integration Documentation</a>
+    <a class="footer-link-item mb-2" href="<?php echo appUrl('index.php#about'); ?>">Mobile Electronic Health Record App</a>
+    <a class="footer-link-item mb-2" href="<?php echo appUrl('index.php#auth-section'); ?>">Physician Consultation Scheduler</a>
+    <a class="footer-link-item mb-2" href="<?php echo appUrl('index.php#faq'); ?>">Privacy & Statutory Legal Compliance</a>
+    <a class="footer-link-item" href="<?php echo appUrl('index.php#auth-section'); ?>">Developer API & Integration Documentation</a>
 </div>
                 </div>
             </div>
@@ -632,12 +632,16 @@
         </div>
     </footer>
 
-    <script src="<?php echo appUrl('js/jquery-3.4.1.min.js'); ?>"></script>
-    <script src="<?php echo appUrl('js/bootstrap.bundle.min.js'); ?>"></script>
-    <script src="<?php echo appUrl('js/aos.js'); ?>"></script>
-    <script src="<?php echo appUrl('js/tools.js'); ?>"></script>
+    <script src="<?php echo appUrl('js/jquery-3.4.1.min.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('js/bootstrap.bundle.min.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('js/aos.js'); ?>" defer></script>
+    <script src="<?php echo appUrl('js/tools.js'); ?>" defer></script>
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof AOS !== 'undefined') {
+                AOS.init();
+            }
+        });
 
         // UI Scripting Engine: Manipulates the DOM CSS style rules to slide sub-forms back and forth
         function switchAuthTab(type) {

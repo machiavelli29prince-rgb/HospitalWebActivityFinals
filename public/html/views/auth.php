@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
     <style>
         body { background-color: #f5f5f5; font-family: sans-serif; }
         .bg-green-primary { background-color: #2e7d32 !important; color: white !important; }
@@ -37,7 +37,7 @@
                     <p class="text-muted small">Access your patient clinical records portal dashboard interface.</p>
                     <hr class="my-4 text-muted opacity-25">
                     
-                    <form action="auth.php" method="POST">
+                    <form action="<?php echo appUrl('html/views/auth.php'); ?>" method="POST">
                         <div class="mb-3">
                             <label class="form-label small fw-bold">Email Address</label>
                             <input type="email" name="email" class="form-control" required autocomplete="username">
@@ -55,7 +55,7 @@
                     <p class="text-muted small">Register account parameters to our active hospital terminal logs.</p>
                     <hr class="my-4 text-muted opacity-25">
                     
-                    <form action="auth.php" method="POST">
+                    <form action="<?php echo appUrl('html/views/auth.php'); ?>" method="POST">
                         <div class="mb-3">
                             <label class="form-label small fw-bold text-dark">Full Name</label>
                             <input type="text" name="name" class="form-control" required autocomplete="name">

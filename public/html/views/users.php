@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="<?php echo appUrl('css/bootstrap-icons.css'); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer crossorigin="anonymous"></script>
     <title>Patient Portal - Rodencia Hospital</title>
     <style>
         body { background-color: #f5f5f5; }
@@ -24,7 +24,7 @@
         <a class="navbar-brand fw-bold" href="#">Rodencia Patient Desk</a>
         <div class="ms-auto d-flex align-items-center gap-3">
             <span class="text-white small fw-bold"><i class="bi bi-person-circle"></i> Connected: <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-            <a href="../logout.php" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
+            <a href="<?php echo appUrl('html/logout.php'); ?>" class="btn btn-sm btn-outline-light px-3">Sign Out</a>
         </div>
     </div>
 </nav>
@@ -113,7 +113,7 @@
                                         <td class="p-3 text-secondary"><?php echo htmlspecialchars($p->time); ?></td>
                                         <td class="text-center p-3">
                                             <div class="btn-group">
-                                                <a href="users.php?id=<?php echo $p->id; ?>" class="btn btn-outline-primary btn-sm">Reschedule</a>
+                                                <a href="<?php echo appUrl('html/views/users.php?id=' . urlencode($p->id)); ?>" class="btn btn-outline-primary btn-sm">Reschedule</a>
                                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="cancelAppointment(<?php echo $p->id; ?>)">Cancel</button>
                                             </div>
                                         </td>

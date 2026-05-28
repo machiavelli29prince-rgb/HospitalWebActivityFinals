@@ -18,22 +18,44 @@ if (session_status() === PHP_SESSION_NONE) {
 // Build the root URL for the current application path. Uses the first /public segment as the web root.
 function getAppBaseUrl(): string
 {
-    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-    $position = strpos($scriptName, '/public');
+    static $baseUrl = null;
+    if ($baseUrl !== null) {
+        return $baseUrl;
+    }
 
-    if ($position !== false) {
-        $base = substr($scriptName, 0, $position + strlen('/public'));
-    } else {
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $scriptFilename = realpath($_SERVER['SCRIPT_FILENAME'] ?? '') ?: '';
+    $documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '') ?: '';
+
+    $base = '';
+    $publicSegment = '/public';
+
+    if (($position = strpos($scriptName, $publicSegment)) !== false) {
+        $base = substr($scriptName, 0, $position + strlen($publicSegment));
+    } elseif ($scriptFilename && $documentRoot && strpos($scriptFilename, $documentRoot) === 0) {
+        $relativePath = str_replace('\\', '/', substr($scriptFilename, strlen($documentRoot)));
+        if (($fsPosition = strpos($relativePath, $publicSegment)) !== false) {
+            $base = substr($relativePath, 0, $fsPosition + strlen($publicSegment));
+        }
+    }
+
+    if (empty($base)) {
         $base = dirname($scriptName);
     }
 
-    return rtrim($base, '/');
+    $baseUrl = rtrim($base, '/');
+    return $baseUrl;
 }
 
 // Resolve a web-relative path from the application root.
 function appUrl(string $path = ''): string
 {
-    return rtrim(getAppBaseUrl(), '/') . '/' . ltrim($path, '/');
+    static $base = null;
+    if ($base === null) {
+        $base = rtrim(getAppBaseUrl(), '/');
+    }
+
+    return $base . '/' . ltrim($path, '/');
 }
 
 // Redirect the user back to the public login/auth page.

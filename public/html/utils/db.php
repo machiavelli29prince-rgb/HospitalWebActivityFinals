@@ -90,6 +90,15 @@ class Database
         return (bool) $this->single();
     }
 
+    // Check whether a given column exists on a table.
+    public function columnExists(string $tableName, string $columnName): bool
+    {
+        $escapedTable = str_replace('`', '``', $tableName);
+        $this->query('SHOW COLUMNS FROM `' . $escapedTable . '` LIKE :column');
+        $this->bind(':column', $columnName);
+        return (bool) $this->single();
+    }
+
     // Create a table if it does not already exist, then return whether the operation succeeded.
     public function createTableIfMissing(string $tableName, string $createSql): bool
     {

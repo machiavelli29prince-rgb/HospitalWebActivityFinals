@@ -17,6 +17,7 @@ if (!function_exists('appUrl')) {
     <link rel="stylesheet" href="<?php echo appUrl('html/views/css/animate.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo appUrl('html/views/css/aos.css'); ?>">
     <link rel="stylesheet" href="<?php echo appUrl('html/views/css/bootstrap-icons.css'); ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer crossorigin="anonymous"></script>
